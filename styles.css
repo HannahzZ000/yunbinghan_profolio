@@ -351,6 +351,7 @@ button {
     color: var(--text-secondary);
     margin-bottom: 48px;
     line-height: 1.6;
+    text-align: center;
 }
 
 .hero-cta {
