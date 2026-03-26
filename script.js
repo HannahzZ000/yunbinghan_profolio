@@ -201,7 +201,6 @@ updateShapes();
     const items = grid.querySelectorAll('.showcase-card');
     if (!items.length) return;
 
-    const offsetRem = 5;
     const columns = [[], [], [], []];
 
     // Distribute items round-robin into 4 columns
@@ -209,18 +208,22 @@ updateShapes();
         columns[index % 4].push(item);
     });
 
-    // Set initial Y offset: col0=0, col1=5rem, col2=10rem, col3=15rem
+    // Col 0 & 2 (odd columns): same offset & speed
+    // Col 1 & 3 (even columns): different offset & speed
+    const offsets = [0, 6, 0, 6];   // initial Y offset in rem
+    const speeds  = [3, 6, 3, 6];   // how far they travel (parallax amount)
+
     columns.forEach((colItems, colIndex) => {
-        if (colIndex > 0) {
-            gsap.set(colItems, { y: `${colIndex * offsetRem}rem` });
+        if (offsets[colIndex] > 0) {
+            gsap.set(colItems, { y: `${offsets[colIndex]}rem` });
         }
     });
 
-    // Scrub-animate each offset column to y:0 as user scrolls
+    // Scrub-animate each column at its own speed
     columns.forEach((colItems, colIndex) => {
-        if (colIndex > 0) {
+        if (speeds[colIndex] > 0) {
             gsap.to(colItems, {
-                y: 0,
+                y: `-${speeds[colIndex]}rem`,
                 ease: 'none',
                 scrollTrigger: {
                     trigger: grid,

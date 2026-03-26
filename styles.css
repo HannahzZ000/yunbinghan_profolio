@@ -835,12 +835,18 @@ button {
 
 /* Card frame — simple rounded rectangle */
 .showcase-card-frame {
-    aspect-ratio: 1 / 1;
+    aspect-ratio: 3 / 4;
     width: 100%;
     display: flex;
     position: relative;
     border-radius: var(--radius);
     overflow: hidden;
+}
+
+/* Columns 2 & 4 (even): taller cards */
+.showcase-card:nth-child(4n+2) .showcase-card-frame,
+.showcase-card:nth-child(4n+4) .showcase-card-frame {
+    aspect-ratio: 2 / 3;
 }
 
 /* SVG frame wrapper — hidden (borders removed) */
