@@ -265,13 +265,13 @@ updateShapes();
     ];
 
     const mobileLayout = [
-        { scale: 0.7756, rotation: -18, x: -8,  y: 5,   zIndex: 1 },
-        { scale: 0.8498, rotation: -12, x: -5.5, y: 2.8, zIndex: 2 },
-        { scale: 0.9346, rotation: -6,  x: -3,  y: 1,   zIndex: 3 },
-        { scale: 1,      rotation: 0,   x: 0,   y: 0,   zIndex: 10 },
-        { scale: 0.9346, rotation: 6,   x: 3,   y: 1,   zIndex: 3 },
-        { scale: 0.8498, rotation: 12,  x: 5.5, y: 2.8, zIndex: 2 },
-        { scale: 0.7756, rotation: 18,  x: 8,   y: 5,   zIndex: 1 },
+        { scale: 0.85, rotation: -10, x: -8,  y: 1.8, zIndex: 1 },
+        { scale: 0.9,  rotation: -6,  x: -5.5, y: 1,  zIndex: 2 },
+        { scale: 0.95, rotation: -3,  x: -3,  y: 0.3, zIndex: 3 },
+        { scale: 1,    rotation: 0,   x: 0,   y: 0,   zIndex: 10 },
+        { scale: 0.95, rotation: 3,   x: 3,   y: 0.3, zIndex: 3 },
+        { scale: 0.9,  rotation: 6,   x: 5.5, y: 1,   zIndex: 2 },
+        { scale: 0.85, rotation: 10,  x: 8,   y: 1.8, zIndex: 1 },
     ];
 
     function getLayout() {
