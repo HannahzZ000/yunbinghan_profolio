@@ -330,7 +330,7 @@ updateShapes();
                 const isLast = index === lastIdx;
                 const normalized = (index - center) / center;
                 const proximity = 1 - Math.abs(normalized);
-                const pushStrength = window.innerWidth <= 480 ? 3 : 8;
+                const pushStrength = window.innerWidth <= 480 ? 2 : 3;
                 const pushMultiplier = 1 + 0.2 * Math.max(0, 3 - distance);
                 let props = {};
 
