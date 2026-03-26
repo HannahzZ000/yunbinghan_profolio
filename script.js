@@ -129,7 +129,7 @@ const revealObserver = new IntersectionObserver(
     { threshold: 0.15, rootMargin: '0px 0px -60px 0px' }
 );
 
-document.querySelectorAll('.split-text, .reveal-up, .work-card').forEach(el => {
+document.querySelectorAll('.split-text, .reveal-up, .work-card, .fan-container').forEach(el => {
     revealObserver.observe(el);
 });
 
