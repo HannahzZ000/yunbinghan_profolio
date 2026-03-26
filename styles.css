@@ -46,16 +46,16 @@
     --accent: #C4B5FD;
     --yellow: #FCD34D;
     --green: #6EE7B7;
-    --bg: #1A1A1A;
-    --bg-secondary: #222222;
-    --surface: #2A2A2A;
+    --bg: #111111;
+    --bg-secondary: #111111;
+    --surface: #111111;
     --text: #F1F5F9;
     --text-secondary: #94A3B8;
     --border: #2A3A5C;
     --shadow: rgba(0, 0, 0, 0.12);
     --shadow-hover: rgba(0, 0, 0, 0.18);
     --shadow-primary: rgba(85, 216, 255, 0.08);
-    --nav-bg: rgba(26, 26, 26, 0.9);
+    --nav-bg: rgba(17, 17, 17, 0.9);
 }
 
 /* --- Hidden scrollbar --- */
@@ -517,7 +517,7 @@ button {
 .marquee-dot {
     width: 8px;
     height: 8px;
-    background: #1A1A1A;
+    background: #111111;
     border-radius: 50%;
     display: inline-block;
     flex-shrink: 0;
