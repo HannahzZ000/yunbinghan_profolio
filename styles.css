@@ -888,25 +888,32 @@ button {
     font-size: 0.95rem;
 }
 
-/* Exact transforms from landonorris.com source */
-.fan-card-1 { transform: scale(0.7756) rotate(-21deg) translateX(-30%) translateY(7.3%); z-index: 1; }
-.fan-card-2 { transform: scale(0.8498) rotate(-14deg) translateX(-22%) translateY(4%);   z-index: 2; }
-.fan-card-3 { transform: scale(0.9346) rotate(-7deg)  translateX(-11%) translateY(1.3%); z-index: 3; }
-.fan-card-4 { transform: scale(1)      rotate(0deg)   translateX(0)    translateY(0);    z-index: 4; }
-.fan-card-5 { transform: scale(0.9346) rotate(7deg)   translateX(11%)  translateY(1.3%); z-index: 3; }
-.fan-card-6 { transform: scale(0.8498) rotate(14deg)  translateX(22%)  translateY(4%);   z-index: 2; }
-.fan-card-7 { transform: scale(0.7756) rotate(21deg)  translateX(30%)  translateY(7.3%); z-index: 1; }
+/*
+ * GSAP applies transforms as: translate → rotate → scale (inside out).
+ * CSS applies left to right. So to match GSAP, we write:
+ *   translateX() translateY() rotate() scale()
+ * The x/y values from GSAP source are in a fluid unit (~0.53rem per unit).
+ * Converted: x:-30 ≈ -16rem, x:-22 ≈ -11.5rem, x:-11 ≈ -5.8rem
+ *            y:7.3 ≈ 3.8rem,  y:4 ≈ 2.1rem,     y:1.3 ≈ 0.7rem
+ */
+.fan-card-1 { transform: translateX(-16rem)  translateY(3.8rem)  rotate(-21deg) scale(0.7756); z-index: 1; }
+.fan-card-2 { transform: translateX(-11.5rem) translateY(2.1rem)  rotate(-14deg) scale(0.8498); z-index: 2; }
+.fan-card-3 { transform: translateX(-5.8rem) translateY(0.7rem)  rotate(-7deg)  scale(0.9346); z-index: 3; }
+.fan-card-4 { transform: translateX(0)       translateY(0)       rotate(0deg)   scale(1);      z-index: 4; }
+.fan-card-5 { transform: translateX(5.8rem)  translateY(0.7rem)  rotate(7deg)   scale(0.9346); z-index: 3; }
+.fan-card-6 { transform: translateX(11.5rem) translateY(2.1rem)  rotate(14deg)  scale(0.8498); z-index: 2; }
+.fan-card-7 { transform: translateX(16rem)   translateY(3.8rem)  rotate(21deg)  scale(0.7756); z-index: 1; }
 
-/* Hover — lift card, enlarge, glow */
+/* Hover — lift card up and bring to front */
 .fan-card:hover { z-index: 10 !important; }
 
-.fan-card-1:hover { transform: scale(0.85) rotate(-21deg) translateX(-30%) translateY(-2%); box-shadow: 0 16px 50px rgba(85, 216, 255, 0.3); }
-.fan-card-2:hover { transform: scale(0.92) rotate(-14deg) translateX(-22%) translateY(-4%); box-shadow: 0 16px 50px rgba(85, 216, 255, 0.3); }
-.fan-card-3:hover { transform: scale(1.0)  rotate(-7deg)  translateX(-11%) translateY(-6%); box-shadow: 0 16px 50px rgba(85, 216, 255, 0.3); }
-.fan-card-4:hover { transform: scale(1.06) rotate(0deg)   translateX(0)    translateY(-5%); box-shadow: 0 16px 50px rgba(85, 216, 255, 0.3); }
-.fan-card-5:hover { transform: scale(1.0)  rotate(7deg)   translateX(11%)  translateY(-6%); box-shadow: 0 16px 50px rgba(85, 216, 255, 0.3); }
-.fan-card-6:hover { transform: scale(0.92) rotate(14deg)  translateX(22%)  translateY(-4%); box-shadow: 0 16px 50px rgba(85, 216, 255, 0.3); }
-.fan-card-7:hover { transform: scale(0.85) rotate(21deg)  translateX(30%)  translateY(-2%); box-shadow: 0 16px 50px rgba(85, 216, 255, 0.3); }
+.fan-card-1:hover { transform: translateX(-16rem)  translateY(1rem)  rotate(-21deg) scale(0.83); box-shadow: 0 16px 50px rgba(85, 216, 255, 0.3); }
+.fan-card-2:hover { transform: translateX(-11.5rem) translateY(-0.5rem) rotate(-14deg) scale(0.9); box-shadow: 0 16px 50px rgba(85, 216, 255, 0.3); }
+.fan-card-3:hover { transform: translateX(-5.8rem) translateY(-1.5rem) rotate(-7deg) scale(0.98); box-shadow: 0 16px 50px rgba(85, 216, 255, 0.3); }
+.fan-card-4:hover { transform: translateX(0)       translateY(-2rem)   rotate(0deg)  scale(1.05); box-shadow: 0 16px 50px rgba(85, 216, 255, 0.3); }
+.fan-card-5:hover { transform: translateX(5.8rem)  translateY(-1.5rem) rotate(7deg)  scale(0.98); box-shadow: 0 16px 50px rgba(85, 216, 255, 0.3); }
+.fan-card-6:hover { transform: translateX(11.5rem) translateY(-0.5rem) rotate(14deg) scale(0.9); box-shadow: 0 16px 50px rgba(85, 216, 255, 0.3); }
+.fan-card-7:hover { transform: translateX(16rem)   translateY(1rem)    rotate(21deg) scale(0.83); box-shadow: 0 16px 50px rgba(85, 216, 255, 0.3); }
 
 /* Scroll-triggered fan-in animation */
 .fan-card { opacity: 0; }
@@ -920,44 +927,51 @@ button {
 .fan-container.visible .fan-card-7 { animation: fan7 0.9s var(--cubic) 0.0s  forwards; }
 
 @keyframes fan1 {
-    from { opacity: 0; transform: scale(0.7) rotate(0deg) translateX(0) translateY(20%); }
-    to   { opacity: 1; transform: scale(0.7756) rotate(-21deg) translateX(-30%) translateY(7.3%); }
+    from { opacity: 0; transform: translateX(0) translateY(5rem) rotate(0deg) scale(0.7); }
+    to   { opacity: 1; transform: translateX(-16rem) translateY(3.8rem) rotate(-21deg) scale(0.7756); }
 }
 @keyframes fan2 {
-    from { opacity: 0; transform: scale(0.7) rotate(0deg) translateX(0) translateY(20%); }
-    to   { opacity: 1; transform: scale(0.8498) rotate(-14deg) translateX(-22%) translateY(4%); }
+    from { opacity: 0; transform: translateX(0) translateY(5rem) rotate(0deg) scale(0.7); }
+    to   { opacity: 1; transform: translateX(-11.5rem) translateY(2.1rem) rotate(-14deg) scale(0.8498); }
 }
 @keyframes fan3 {
-    from { opacity: 0; transform: scale(0.7) rotate(0deg) translateX(0) translateY(20%); }
-    to   { opacity: 1; transform: scale(0.9346) rotate(-7deg) translateX(-11%) translateY(1.3%); }
+    from { opacity: 0; transform: translateX(0) translateY(5rem) rotate(0deg) scale(0.7); }
+    to   { opacity: 1; transform: translateX(-5.8rem) translateY(0.7rem) rotate(-7deg) scale(0.9346); }
 }
 @keyframes fan4 {
-    from { opacity: 0; transform: scale(0.7) rotate(0deg) translateX(0) translateY(20%); }
-    to   { opacity: 1; transform: scale(1) rotate(0deg) translateX(0) translateY(0); }
+    from { opacity: 0; transform: translateX(0) translateY(5rem) rotate(0deg) scale(0.7); }
+    to   { opacity: 1; transform: translateX(0) translateY(0) rotate(0deg) scale(1); }
 }
 @keyframes fan5 {
-    from { opacity: 0; transform: scale(0.7) rotate(0deg) translateX(0) translateY(20%); }
-    to   { opacity: 1; transform: scale(0.9346) rotate(7deg) translateX(11%) translateY(1.3%); }
+    from { opacity: 0; transform: translateX(0) translateY(5rem) rotate(0deg) scale(0.7); }
+    to   { opacity: 1; transform: translateX(5.8rem) translateY(0.7rem) rotate(7deg) scale(0.9346); }
 }
 @keyframes fan6 {
-    from { opacity: 0; transform: scale(0.7) rotate(0deg) translateX(0) translateY(20%); }
-    to   { opacity: 1; transform: scale(0.8498) rotate(14deg) translateX(22%) translateY(4%); }
+    from { opacity: 0; transform: translateX(0) translateY(5rem) rotate(0deg) scale(0.7); }
+    to   { opacity: 1; transform: translateX(11.5rem) translateY(2.1rem) rotate(14deg) scale(0.8498); }
 }
 @keyframes fan7 {
-    from { opacity: 0; transform: scale(0.7) rotate(0deg) translateX(0) translateY(20%); }
-    to   { opacity: 1; transform: scale(0.7756) rotate(21deg) translateX(30%) translateY(7.3%); }
+    from { opacity: 0; transform: translateX(0) translateY(5rem) rotate(0deg) scale(0.7); }
+    to   { opacity: 1; transform: translateX(16rem) translateY(3.8rem) rotate(21deg) scale(0.7756); }
 }
 
 /* Responsive — tablet */
 @media (max-width: 991px) {
     .fan-card {
-        aspect-ratio: 20 / 35;
         width: 17rem;
         height: auto;
+        aspect-ratio: 20 / 35;
     }
+
+    .fan-card-1 { transform: translateX(-12rem) translateY(3.8rem) rotate(-21deg) scale(0.7756); }
+    .fan-card-2 { transform: translateX(-8.5rem) translateY(2.1rem) rotate(-14deg) scale(0.8498); }
+    .fan-card-3 { transform: translateX(-4.2rem) translateY(0.7rem) rotate(-7deg) scale(0.9346); }
+    .fan-card-5 { transform: translateX(4.2rem) translateY(0.7rem) rotate(7deg) scale(0.9346); }
+    .fan-card-6 { transform: translateX(8.5rem) translateY(2.1rem) rotate(14deg) scale(0.8498); }
+    .fan-card-7 { transform: translateX(12rem) translateY(3.8rem) rotate(21deg) scale(0.7756); }
 }
 
-/* Responsive — mobile landscape */
+/* Responsive — mobile */
 @media (max-width: 767px) {
     .gallery-fan {
         padding: 80px 20px 100px;
@@ -973,33 +987,26 @@ button {
         aspect-ratio: 20 / 35;
     }
 
-    .fan-card-1 { transform: scale(0.7756) rotate(-21deg) translateX(-15%) translateY(7.3%); }
-    .fan-card-2 { transform: scale(0.8498) rotate(-14deg) translateX(-11%) translateY(4%); }
-    .fan-card-3 { transform: scale(0.9346) rotate(-7deg)  translateX(-6%)  translateY(1.3%); }
-    .fan-card-4 { transform: scale(1)      rotate(0deg)   translateX(0)    translateY(0); }
-    .fan-card-5 { transform: scale(0.9346) rotate(7deg)   translateX(6%)   translateY(1.3%); }
-    .fan-card-6 { transform: scale(0.8498) rotate(14deg)  translateX(11%)  translateY(4%); }
-    .fan-card-7 { transform: scale(0.7756) rotate(21deg)  translateX(15%)  translateY(7.3%); }
-
-    .fan-card-1:hover { transform: scale(0.85) rotate(-21deg) translateX(-15%) translateY(-2%); }
-    .fan-card-2:hover { transform: scale(0.92) rotate(-14deg) translateX(-11%) translateY(-4%); }
-    .fan-card-3:hover { transform: scale(1.0)  rotate(-7deg)  translateX(-6%)  translateY(-6%); }
-    .fan-card-4:hover { transform: scale(1.06) rotate(0deg)   translateX(0)    translateY(-5%); }
-    .fan-card-5:hover { transform: scale(1.0)  rotate(7deg)   translateX(6%)   translateY(-6%); }
-    .fan-card-6:hover { transform: scale(0.92) rotate(14deg)  translateX(11%)  translateY(-4%); }
-    .fan-card-7:hover { transform: scale(0.85) rotate(21deg)  translateX(15%)  translateY(-2%); }
+    .fan-card-1 { transform: translateX(-8rem) translateY(3.8rem) rotate(-21deg) scale(0.7756); }
+    .fan-card-2 { transform: translateX(-5.8rem) translateY(2.1rem) rotate(-14deg) scale(0.8498); }
+    .fan-card-3 { transform: translateX(-3rem) translateY(0.7rem) rotate(-7deg) scale(0.9346); }
+    .fan-card-4 { transform: translateX(0) translateY(0) rotate(0deg) scale(1); }
+    .fan-card-5 { transform: translateX(3rem) translateY(0.7rem) rotate(7deg) scale(0.9346); }
+    .fan-card-6 { transform: translateX(5.8rem) translateY(2.1rem) rotate(14deg) scale(0.8498); }
+    .fan-card-7 { transform: translateX(8rem) translateY(3.8rem) rotate(21deg) scale(0.7756); }
 }
 
-/* Responsive — mobile portrait */
+/* Responsive — small mobile */
 @media (max-width: 479px) {
-    .fan-container {
-        height: 24rem;
-    }
+    .fan-container { height: 22rem; }
+    .fan-card { width: 12rem; }
 
-    .fan-card {
-        width: 14rem;
-        aspect-ratio: 20 / 35;
-    }
+    .fan-card-1 { transform: translateX(-6rem) translateY(3rem) rotate(-21deg) scale(0.7756); }
+    .fan-card-2 { transform: translateX(-4.2rem) translateY(1.6rem) rotate(-14deg) scale(0.8498); }
+    .fan-card-3 { transform: translateX(-2.2rem) translateY(0.5rem) rotate(-7deg) scale(0.9346); }
+    .fan-card-5 { transform: translateX(2.2rem) translateY(0.5rem) rotate(7deg) scale(0.9346); }
+    .fan-card-6 { transform: translateX(4.2rem) translateY(1.6rem) rotate(14deg) scale(0.8498); }
+    .fan-card-7 { transform: translateX(6rem) translateY(3rem) rotate(21deg) scale(0.7756); }
 }
 
 /* --- Contact Section --- */
