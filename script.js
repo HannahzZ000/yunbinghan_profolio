@@ -245,7 +245,7 @@ updateShapes();
         { scale: 0.7756, rotation: 21,  x: 30,  y: 7.3, zIndex: 1 },
     ];
 
-    const mobileLayout = [
+    const tabletLayout = [
         { scale: 0.7756, rotation: -21, x: -15, y: 7.3, zIndex: 1 },
         { scale: 0.8498, rotation: -14, x: -11, y: 4,   zIndex: 2 },
         { scale: 0.9346, rotation: -7,  x: -6,  y: 1.3, zIndex: 3 },
@@ -255,8 +255,20 @@ updateShapes();
         { scale: 0.7756, rotation: 21,  x: 15,  y: 7.3, zIndex: 1 },
     ];
 
+    const mobileLayout = [
+        { scale: 0.7756, rotation: -18, x: -8,  y: 5,   zIndex: 1 },
+        { scale: 0.8498, rotation: -12, x: -5.5, y: 2.8, zIndex: 2 },
+        { scale: 0.9346, rotation: -6,  x: -3,  y: 1,   zIndex: 3 },
+        { scale: 1,      rotation: 0,   x: 0,   y: 0,   zIndex: 10 },
+        { scale: 0.9346, rotation: 6,   x: 3,   y: 1,   zIndex: 3 },
+        { scale: 0.8498, rotation: 12,  x: 5.5, y: 2.8, zIndex: 2 },
+        { scale: 0.7756, rotation: 18,  x: 8,   y: 5,   zIndex: 1 },
+    ];
+
     function getLayout() {
-        return window.innerWidth <= 991 ? mobileLayout : desktopLayout;
+        if (window.innerWidth <= 480) return mobileLayout;
+        if (window.innerWidth <= 991) return tabletLayout;
+        return desktopLayout;
     }
 
     let layout = getLayout();
@@ -309,7 +321,7 @@ updateShapes();
                 const isLast = index === lastIdx;
                 const normalized = (index - center) / center;
                 const proximity = 1 - Math.abs(normalized);
-                const pushStrength = 8;
+                const pushStrength = window.innerWidth <= 480 ? 3 : 8;
                 const pushMultiplier = 1 + 0.2 * Math.max(0, 3 - distance);
                 let props = {};
 

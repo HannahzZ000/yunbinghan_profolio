@@ -1093,19 +1093,20 @@ button {
     }
 
     .fan-container {
-        height: 24rem;
+        height: 20rem;
     }
 
     .fan-card {
-        width: 11rem;
-        height: 19rem;
+        width: 8rem;
+        height: 13.5rem;
+        border-radius: 1.5rem;
     }
 }
 
 /* Responsive — small mobile */
 @media (max-width: 479px) {
-    .fan-container { height: 20rem; }
-    .fan-card { width: 9rem; height: 15.5rem; }
+    .fan-container { height: 17rem; }
+    .fan-card { width: 6.5rem; height: 11rem; border-radius: 1.2rem; }
 }
 
 /* --- Contact Section --- */
