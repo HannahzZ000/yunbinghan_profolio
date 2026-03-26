@@ -797,13 +797,9 @@ button {
 /* --- Showcase Grid Section (bento grid inspired by landonorris.com) --- */
 .showcase-grid {
     padding: 120px 0 80px;
-    background: #1A1A1A;
+    background: transparent;
     position: relative;
     overflow: hidden;
-}
-
-[data-theme="dark"] .showcase-grid {
-    background: #111111;
 }
 
 .showcase-container {
@@ -999,13 +995,9 @@ button {
 /* --- Gallery Fan Section --- */
 .gallery-fan {
     padding: 120px 48px 60px;
-    background: #1A1A1A;
+    background: transparent;
     text-align: center;
     position: relative;
-}
-
-[data-theme="dark"] .gallery-fan {
-    background: #111111;
 }
 
 .gallery-fan-header {
