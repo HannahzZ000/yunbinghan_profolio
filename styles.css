@@ -843,12 +843,6 @@ button {
     overflow: hidden;
 }
 
-/* Columns 2 & 4 (even): taller cards */
-.showcase-card:nth-child(4n+2) .showcase-card-frame,
-.showcase-card:nth-child(4n+4) .showcase-card-frame {
-    aspect-ratio: 2 / 3;
-}
-
 /* SVG frame wrapper — hidden (borders removed) */
 .showcase-frame-w {
     display: none;
