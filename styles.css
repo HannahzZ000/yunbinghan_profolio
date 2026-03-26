@@ -33,9 +33,9 @@
     --radius-sm: 12px;
     --cubic: cubic-bezier(0.65, 0.05, 0, 1);
     --duration: 0.75s;
-    --font-display: 'Syne', sans-serif;
-    --font-heading: 'Space Grotesk', sans-serif;
-    --font-body: 'DM Sans', sans-serif;
+    --font-display: 'Montserrat', sans-serif;
+    --font-heading: 'Montserrat', sans-serif;
+    --font-body: 'Montserrat', sans-serif;
 }
 
 /* --- Night Theme --- */
