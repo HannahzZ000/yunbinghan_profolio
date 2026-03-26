@@ -3,18 +3,7 @@
 // Premium interactions inspired by landonorris.com
 // ============================================
 
-// --- Lenis Smooth Scroll ---
-const lenis = new Lenis({
-    duration: 1.2,
-    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-    smoothWheel: true,
-});
-
-function raf(time) {
-    lenis.raf(time);
-    requestAnimationFrame(raf);
-}
-requestAnimationFrame(raf);
+gsap.registerPlugin(ScrollTrigger);
 
 // --- Page Load Transition ---
 const pageTransition = document.getElementById('pageTransition');
@@ -85,15 +74,14 @@ document.querySelectorAll('[data-hover]').forEach(el => {
 const nav = document.querySelector('.nav');
 let lastScrollY = 0;
 
-lenis.on('scroll', ({ scroll }) => {
-    // Add shadow on scroll
+window.addEventListener('scroll', () => {
+    const scroll = window.scrollY;
     if (scroll > 50) {
         nav.classList.add('scrolled');
     } else {
         nav.classList.remove('scrolled');
     }
 
-    // Hide nav on scroll down, show on scroll up
     if (scroll > lastScrollY && scroll > 200) {
         nav.classList.add('nav-hidden');
     } else {
@@ -129,7 +117,7 @@ const revealObserver = new IntersectionObserver(
     { threshold: 0.15, rootMargin: '0px 0px -60px 0px' }
 );
 
-document.querySelectorAll('.split-text, .reveal-up, .work-card, .fan-container').forEach(el => {
+document.querySelectorAll('.split-text, .reveal-up, .work-card').forEach(el => {
     revealObserver.observe(el);
 });
 
@@ -159,7 +147,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         e.preventDefault();
         const target = document.querySelector(anchor.getAttribute('href'));
         if (target) {
-            lenis.scrollTo(target, { offset: -80 });
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
     });
 });
@@ -190,9 +178,254 @@ document.addEventListener('mousemove', (e) => {
 function updateShapes() {
     shapes.forEach((shape, i) => {
         const speed = (i + 1) * 6;
-        const currentTransform = shape.style.transform || '';
         shape.style.transform = `translate(${shapeMouseX * speed}px, ${shapeMouseY * speed}px)`;
     });
     requestAnimationFrame(updateShapes);
 }
 updateShapes();
+
+// --- Showcase Grid Parallax (GSAP ScrollTrigger — ported from landonorris.com) ---
+(function initShowcaseParallax() {
+    const grid = document.querySelector('[data-showcase-grid]');
+    if (!grid || window.innerWidth < 992) return;
+
+    const items = grid.querySelectorAll('.showcase-card');
+    if (!items.length) return;
+
+    const offsetRem = 5;
+    const columns = [[], [], [], []];
+
+    // Distribute items round-robin into 4 columns
+    items.forEach((item, index) => {
+        columns[index % 4].push(item);
+    });
+
+    // Set initial Y offset: col0=0, col1=5rem, col2=10rem, col3=15rem
+    columns.forEach((colItems, colIndex) => {
+        if (colIndex > 0) {
+            gsap.set(colItems, { y: `${colIndex * offsetRem}rem` });
+        }
+    });
+
+    // Scrub-animate each offset column to y:0 as user scrolls
+    columns.forEach((colItems, colIndex) => {
+        if (colIndex > 0) {
+            gsap.to(colItems, {
+                y: 0,
+                ease: 'none',
+                scrollTrigger: {
+                    trigger: grid,
+                    start: 'top bottom',
+                    end: 'bottom top',
+                    scrub: true,
+                },
+            });
+        }
+    });
+})();
+
+// --- Fan Card Gallery (GSAP — ported from landonorris.com source) ---
+(function fanCardGallery() {
+    const wrap = document.querySelector('.fan-container');
+    if (!wrap) return;
+
+    const cards = Array.from(wrap.querySelectorAll('.fan-card'));
+    if (!cards.length) return;
+
+    const center = Math.floor(cards.length / 2);
+
+    // Exact GSAP transform values from landonorris.com JS bundle
+    const desktopLayout = [
+        { scale: 0.7756, rotation: -21, x: -30, y: 7.3, zIndex: 1 },
+        { scale: 0.8498, rotation: -14, x: -22, y: 4,   zIndex: 2 },
+        { scale: 0.9346, rotation: -7,  x: -11, y: 1.3, zIndex: 3 },
+        { scale: 1,      rotation: 0,   x: 0,   y: 0,   zIndex: 10 },
+        { scale: 0.9346, rotation: 7,   x: 11,  y: 1.3, zIndex: 3 },
+        { scale: 0.8498, rotation: 14,  x: 22,  y: 4,   zIndex: 2 },
+        { scale: 0.7756, rotation: 21,  x: 30,  y: 7.3, zIndex: 1 },
+    ];
+
+    const mobileLayout = [
+        { scale: 0.7756, rotation: -21, x: -15, y: 7.3, zIndex: 1 },
+        { scale: 0.8498, rotation: -14, x: -11, y: 4,   zIndex: 2 },
+        { scale: 0.9346, rotation: -7,  x: -6,  y: 1.3, zIndex: 3 },
+        { scale: 1,      rotation: 0,   x: 0,   y: 0,   zIndex: 10 },
+        { scale: 0.9346, rotation: 7,   x: 6,   y: 1.3, zIndex: 3 },
+        { scale: 0.8498, rotation: 14,  x: 11,  y: 4,   zIndex: 2 },
+        { scale: 0.7756, rotation: 21,  x: 15,  y: 7.3, zIndex: 1 },
+    ];
+
+    function getLayout() {
+        return window.innerWidth <= 991 ? mobileLayout : desktopLayout;
+    }
+
+    let layout = getLayout();
+    let restLayout = [...layout];
+
+    // Initial state: stacked in center, below view
+    gsap.set(cards, {
+        x: 0,
+        y: '10rem',
+        scale: 1,
+        rotation: 0,
+        transformOrigin: 'center center',
+        opacity: 1,
+    });
+
+    cards.forEach((card, i) => {
+        card.style.zIndex = layout[i].zIndex;
+    });
+
+    // --- Hover interaction ---
+    function setupHover() {
+        let hoveredIndex = null;
+        let leaveTimeout = null;
+
+        const onResize = () => {
+            layout = getLayout();
+            restLayout = [...layout];
+            if (hoveredIndex === null) resetToRest();
+        };
+        window.addEventListener('resize', onResize);
+
+        function animateHover(hoverIdx) {
+            layout = getLayout();
+            const tl = gsap.timeline();
+            const sorted = cards.map((card, i) => ({
+                card, index: i, distance: Math.abs(i - hoverIdx),
+            }));
+            sorted.sort((a, b) => {
+                if (a.index === hoverIdx) return -1;
+                if (b.index === hoverIdx) return 1;
+                return a.distance - b.distance;
+            });
+
+            const lastIdx = cards.length - 1;
+
+            sorted.forEach(({ card, index, distance }) => {
+                const isLeft = index < hoverIdx;
+                const isRight = index > hoverIdx;
+                const isHovered = index === hoverIdx;
+                const isLast = index === lastIdx;
+                const normalized = (index - center) / center;
+                const proximity = 1 - Math.abs(normalized);
+                const pushStrength = 8;
+                const pushMultiplier = 1 + 0.2 * Math.max(0, 3 - distance);
+                let props = {};
+
+                if (isHovered) {
+                    props = {
+                        y: restLayout[index].y - 2.5 + 'rem',
+                        x: restLayout[index].x + 'rem',
+                        scale: restLayout[index].scale * 1.08,
+                        rotation: restLayout[index].rotation,
+                        duration: 0.5,
+                        ease: 'elastic.out(1, 0.75)',
+                        overwrite: 'auto',
+                    };
+                } else if (isLeft) {
+                    const push = pushStrength * proximity * pushMultiplier;
+                    const rotAdj = -3 * (1 / (distance + 1));
+                    props = {
+                        x: restLayout[index].x - push + 'rem',
+                        y: restLayout[index].y + 'rem',
+                        scale: restLayout[index].scale,
+                        rotation: restLayout[index].rotation + rotAdj,
+                        duration: 0.5,
+                        ease: 'elastic.out(1, 0.75)',
+                        overwrite: 'auto',
+                    };
+                } else if (isRight) {
+                    const push = isLast ? 0 : pushStrength * proximity * pushMultiplier;
+                    const rotAdj = 3 * (1 / (distance + 1));
+                    props = {
+                        x: restLayout[index].x + push + 'rem',
+                        y: restLayout[index].y + (isLast ? -1 : 0) + 'rem',
+                        scale: restLayout[index].scale,
+                        rotation: restLayout[index].rotation + rotAdj,
+                        duration: 0.5,
+                        ease: 'elastic.out(1, 0.75)',
+                        overwrite: 'auto',
+                    };
+                }
+
+                tl.to(card, props, distance * 0.02);
+            });
+
+            return tl;
+        }
+
+        function resetToRest() {
+            layout = getLayout();
+            const tl = gsap.timeline();
+            const sorted = cards.map((card, i) => ({
+                card, index: i, distance: Math.abs(i - center),
+            }));
+            sorted.sort((a, b) => a.distance - b.distance);
+
+            sorted.forEach(({ card, index, distance }) => {
+                tl.to(card, {
+                    x: restLayout[index].x + 'rem',
+                    y: restLayout[index].y + 'rem',
+                    scale: restLayout[index].scale,
+                    rotation: restLayout[index].rotation,
+                    duration: 0.5,
+                    ease: 'elastic.out(1, 0.75)',
+                    overwrite: 'auto',
+                }, distance * 0.02);
+            });
+
+            return tl;
+        }
+
+        cards.forEach((card, idx) => {
+            card.addEventListener('mouseenter', () => {
+                if (leaveTimeout) { clearTimeout(leaveTimeout); leaveTimeout = null; }
+                hoveredIndex = idx;
+                animateHover(idx);
+            });
+            card.addEventListener('mouseleave', () => {
+                if (hoveredIndex === idx) {
+                    leaveTimeout = setTimeout(() => {
+                        if (hoveredIndex === idx) {
+                            hoveredIndex = null;
+                            resetToRest();
+                        }
+                        leaveTimeout = null;
+                    }, 50);
+                }
+            });
+        });
+
+        wrap.addEventListener('mouseleave', () => {
+            if (leaveTimeout) { clearTimeout(leaveTimeout); leaveTimeout = null; }
+            hoveredIndex = null;
+            resetToRest();
+        });
+    }
+
+    // --- Scroll-triggered entrance animation ---
+    gsap.timeline({
+        scrollTrigger: {
+            trigger: wrap,
+            start: 'top 90%',
+            once: true,
+        },
+        onComplete: setupHover,
+    })
+    .to(cards, {
+        y: 0,
+        duration: 0.8,
+        ease: 'power2.out',
+        stagger: { amount: 0.5, from: 'end' },
+    })
+    .to(cards, {
+        x: (i) => layout[i].x + 'rem',
+        y: (i) => layout[i].y + 'rem',
+        scale: (i) => layout[i].scale,
+        rotation: (i) => layout[i].rotation,
+        duration: 1.2,
+        ease: 'elastic.out(1, 0.75)',
+        stagger: { amount: 0.2, from: 'center' },
+    }, '-=0.4');
+})();

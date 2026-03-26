@@ -58,15 +58,6 @@
     --nav-bg: rgba(11, 17, 33, 0.9);
 }
 
-/* --- Lenis smooth scroll --- */
-html.lenis, html.lenis body {
-    height: auto;
-}
-
-.lenis.lenis-smooth {
-    scroll-behavior: initial;
-}
-
 /* --- Hidden scrollbar --- */
 ::-webkit-scrollbar { display: none; }
 html { scrollbar-width: none; -ms-overflow-style: none; }
@@ -803,12 +794,213 @@ button {
     background: var(--surface);
 }
 
+/* --- Showcase Grid Section (bento grid inspired by landonorris.com) --- */
+.showcase-grid {
+    padding: 120px 0 80px;
+    background: #0B1121;
+    position: relative;
+    overflow: hidden;
+}
+
+[data-theme="dark"] .showcase-grid {
+    background: #060B18;
+}
+
+.showcase-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 48px;
+}
+
+.showcase-grid .section-title {
+    color: #F1F5F9;
+}
+
+.showcase-subtitle {
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    color: #94A3B8;
+    text-align: center;
+}
+
+.showcase-spacer {
+    height: 4rem;
+}
+
+/* 4-column bento grid */
+.showcase-bento {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.25rem;
+}
+
+/* Card wrapper */
+.showcase-card {
+    position: relative;
+}
+
+/* Card frame — nearly square with notch-tab at bottom-right */
+.showcase-card-frame {
+    aspect-ratio: 406.89 / 411;
+    width: 100%;
+    display: flex;
+    position: relative;
+    --mask-url: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 407 411'%3E%3Cpath d='M8 0h391.89a7 7 0 0 1 7 7v357.983a7 7 0 0 1-7 7H263.329a24 24 0 0 0-18.766 9.038l-16.499 20.694A22 22 0 0 1 210.862 411H8a7 7 0 0 1-7-7V7a7 7 0 0 1 7-7Z' fill='white'/%3E%3C/svg%3E");
+    -webkit-mask-image: var(--mask-url);
+    mask-image: var(--mask-url);
+    -webkit-mask-size: cover;
+    mask-size: cover;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+}
+
+/* SVG frame wrapper — overlays on top of images */
+.showcase-frame-w {
+    z-index: 10;
+    pointer-events: none;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    position: relative;
+}
+
+.showcase-frame {
+    aspect-ratio: 406.89 / 411;
+    width: 100%;
+    display: flex;
+}
+
+.showcase-frame.is-base {
+    color: #2A3A5C;
+}
+
+.showcase-frame.is-overlay {
+    z-index: 10;
+    opacity: 0;
+    position: absolute;
+    inset: 0;
+    transition: opacity var(--duration) var(--cubic);
+}
+
+/* Image container */
+.showcase-card-images {
+    z-index: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    inset: 0;
+}
+
+.showcase-img-base {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transition: transform var(--duration) var(--cubic);
+}
+
+.showcase-img-reveal {
+    clip-path: ellipse(100% 0% at 50% 0);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    inset: 0;
+    transform: scale(1.05);
+    transition: clip-path var(--duration) var(--cubic), transform var(--duration) var(--cubic);
+}
+
+.showcase-img-placeholder {
+    position: absolute;
+    z-index: 2;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.35);
+    font-size: 0.9rem;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    transition: opacity var(--duration) var(--cubic);
+}
+
+/* Hover effects */
+.showcase-card:hover .showcase-img-base {
+    transform: scale(1.1);
+}
+
+.showcase-card:hover .showcase-img-reveal {
+    clip-path: ellipse(100% 120% at 50% 0%);
+    transform: scale(1);
+}
+
+.showcase-card:hover .showcase-frame.is-overlay {
+    opacity: 1;
+}
+
+.showcase-card:hover .showcase-img-placeholder {
+    opacity: 0;
+}
+
+/* Card label — sits below the frame at bottom-right */
+.showcase-card-label {
+    z-index: 5;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 0.5rem;
+    height: 2rem;
+    padding-right: 0.25rem;
+}
+
+.showcase-card-name {
+    font-family: var(--font-heading);
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: #94A3B8;
+    letter-spacing: 0.02em;
+}
+
+.showcase-card-year {
+    font-family: var(--font-display);
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+/* Showcase Responsive — Tablet */
+@media (max-width: 991px) {
+    .showcase-bento {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .showcase-container {
+        padding: 0 32px;
+    }
+}
+
+/* Showcase Responsive — Mobile */
+@media (max-width: 767px) {
+    .showcase-grid {
+        padding: 80px 0 60px;
+    }
+    .showcase-container {
+        padding: 0 20px;
+    }
+    .showcase-bento {
+        gap: 0.75rem;
+    }
+    .showcase-card-name,
+    .showcase-card-year {
+        font-size: 0.7rem;
+    }
+}
+
 /* --- Gallery Fan Section --- */
 .gallery-fan {
-    padding: 120px 48px 160px;
+    padding: 120px 48px 60px;
     background: #0B1121;
     text-align: center;
-    overflow: hidden;
     position: relative;
 }
 
@@ -817,7 +1009,7 @@ button {
 }
 
 .gallery-fan-header {
-    margin-bottom: 80px;
+    margin-bottom: 60px;
     position: relative;
     z-index: 2;
 }
@@ -839,21 +1031,16 @@ button {
 }
 
 /*
- * Fan container — exact values extracted from landonorris.com GSAP source:
- *   Card CSS: width 20rem, height 35rem, border-radius 3.31625rem, absolute, overflow clip
- *   Layout:   flex, justify-content center, align-items center, max-width 80rem, height 36rem
- *   Transforms per card (from center outward):
- *     Center:   scale 1.0,    rotation 0,     x 0%,    y 0%,   z-index 4
- *     ±1 slot:  scale 0.9346, rotation ±7deg, x ±11%,  y 1.3%, z-index 3
- *     ±2 slots: scale 0.8498, rotation ±14deg,x ±22%,  y 4%,   z-index 2
- *     ±3 slots: scale 0.7756, rotation ±21deg,x ±30%,  y 7.3%, z-index 1
+ * Fan container + cards — layout only.
+ * All transforms (position, rotation, scale) are handled by GSAP,
+ * directly ported from landonorris.com source code.
  */
 .fan-container {
     justify-content: center;
     align-items: center;
     width: 100%;
     max-width: 80rem;
-    height: 36rem;
+    height: 32rem;
     display: flex;
     position: relative;
     margin: 0 auto;
@@ -863,13 +1050,13 @@ button {
     z-index: 0;
     backface-visibility: hidden;
     will-change: transform;
-    border-radius: 3.31625rem;
+    border-radius: 2.5rem;
     flex: none;
-    width: 20rem;
-    height: 35rem;
+    width: 15rem;
+    height: 26rem;
     position: absolute;
     overflow: clip;
-    transition: transform 0.75s var(--cubic), box-shadow 0.75s var(--cubic);
+    opacity: 1;
 }
 
 .fan-card-inner {
@@ -888,125 +1075,37 @@ button {
     font-size: 0.95rem;
 }
 
-/*
- * GSAP applies transforms as: translate → rotate → scale (inside out).
- * CSS applies left to right. So to match GSAP, we write:
- *   translateX() translateY() rotate() scale()
- * The x/y values from GSAP source are in a fluid unit (~0.53rem per unit).
- * Converted: x:-30 ≈ -16rem, x:-22 ≈ -11.5rem, x:-11 ≈ -5.8rem
- *            y:7.3 ≈ 3.8rem,  y:4 ≈ 2.1rem,     y:1.3 ≈ 0.7rem
- */
-.fan-card-1 { transform: translateX(-16rem)  translateY(3.8rem)  rotate(-21deg) scale(0.7756); z-index: 1; }
-.fan-card-2 { transform: translateX(-11.5rem) translateY(2.1rem)  rotate(-14deg) scale(0.8498); z-index: 2; }
-.fan-card-3 { transform: translateX(-5.8rem) translateY(0.7rem)  rotate(-7deg)  scale(0.9346); z-index: 3; }
-.fan-card-4 { transform: translateX(0)       translateY(0)       rotate(0deg)   scale(1);      z-index: 4; }
-.fan-card-5 { transform: translateX(5.8rem)  translateY(0.7rem)  rotate(7deg)   scale(0.9346); z-index: 3; }
-.fan-card-6 { transform: translateX(11.5rem) translateY(2.1rem)  rotate(14deg)  scale(0.8498); z-index: 2; }
-.fan-card-7 { transform: translateX(16rem)   translateY(3.8rem)  rotate(21deg)  scale(0.7756); z-index: 1; }
-
-/* Hover — lift card up and bring to front */
-.fan-card:hover { z-index: 10 !important; }
-
-.fan-card-1:hover { transform: translateX(-16rem)  translateY(1rem)  rotate(-21deg) scale(0.83); box-shadow: 0 16px 50px rgba(85, 216, 255, 0.3); }
-.fan-card-2:hover { transform: translateX(-11.5rem) translateY(-0.5rem) rotate(-14deg) scale(0.9); box-shadow: 0 16px 50px rgba(85, 216, 255, 0.3); }
-.fan-card-3:hover { transform: translateX(-5.8rem) translateY(-1.5rem) rotate(-7deg) scale(0.98); box-shadow: 0 16px 50px rgba(85, 216, 255, 0.3); }
-.fan-card-4:hover { transform: translateX(0)       translateY(-2rem)   rotate(0deg)  scale(1.05); box-shadow: 0 16px 50px rgba(85, 216, 255, 0.3); }
-.fan-card-5:hover { transform: translateX(5.8rem)  translateY(-1.5rem) rotate(7deg)  scale(0.98); box-shadow: 0 16px 50px rgba(85, 216, 255, 0.3); }
-.fan-card-6:hover { transform: translateX(11.5rem) translateY(-0.5rem) rotate(14deg) scale(0.9); box-shadow: 0 16px 50px rgba(85, 216, 255, 0.3); }
-.fan-card-7:hover { transform: translateX(16rem)   translateY(1rem)    rotate(21deg) scale(0.83); box-shadow: 0 16px 50px rgba(85, 216, 255, 0.3); }
-
-/* Scroll-triggered fan-in animation */
-.fan-card { opacity: 0; }
-
-.fan-container.visible .fan-card-1 { animation: fan1 0.9s var(--cubic) 0.0s  forwards; }
-.fan-container.visible .fan-card-2 { animation: fan2 0.9s var(--cubic) 0.05s forwards; }
-.fan-container.visible .fan-card-3 { animation: fan3 0.9s var(--cubic) 0.1s  forwards; }
-.fan-container.visible .fan-card-4 { animation: fan4 0.9s var(--cubic) 0.15s forwards; }
-.fan-container.visible .fan-card-5 { animation: fan5 0.9s var(--cubic) 0.1s  forwards; }
-.fan-container.visible .fan-card-6 { animation: fan6 0.9s var(--cubic) 0.05s forwards; }
-.fan-container.visible .fan-card-7 { animation: fan7 0.9s var(--cubic) 0.0s  forwards; }
-
-@keyframes fan1 {
-    from { opacity: 0; transform: translateX(0) translateY(5rem) rotate(0deg) scale(0.7); }
-    to   { opacity: 1; transform: translateX(-16rem) translateY(3.8rem) rotate(-21deg) scale(0.7756); }
-}
-@keyframes fan2 {
-    from { opacity: 0; transform: translateX(0) translateY(5rem) rotate(0deg) scale(0.7); }
-    to   { opacity: 1; transform: translateX(-11.5rem) translateY(2.1rem) rotate(-14deg) scale(0.8498); }
-}
-@keyframes fan3 {
-    from { opacity: 0; transform: translateX(0) translateY(5rem) rotate(0deg) scale(0.7); }
-    to   { opacity: 1; transform: translateX(-5.8rem) translateY(0.7rem) rotate(-7deg) scale(0.9346); }
-}
-@keyframes fan4 {
-    from { opacity: 0; transform: translateX(0) translateY(5rem) rotate(0deg) scale(0.7); }
-    to   { opacity: 1; transform: translateX(0) translateY(0) rotate(0deg) scale(1); }
-}
-@keyframes fan5 {
-    from { opacity: 0; transform: translateX(0) translateY(5rem) rotate(0deg) scale(0.7); }
-    to   { opacity: 1; transform: translateX(5.8rem) translateY(0.7rem) rotate(7deg) scale(0.9346); }
-}
-@keyframes fan6 {
-    from { opacity: 0; transform: translateX(0) translateY(5rem) rotate(0deg) scale(0.7); }
-    to   { opacity: 1; transform: translateX(11.5rem) translateY(2.1rem) rotate(14deg) scale(0.8498); }
-}
-@keyframes fan7 {
-    from { opacity: 0; transform: translateX(0) translateY(5rem) rotate(0deg) scale(0.7); }
-    to   { opacity: 1; transform: translateX(16rem) translateY(3.8rem) rotate(21deg) scale(0.7756); }
-}
-
 /* Responsive — tablet */
 @media (max-width: 991px) {
     .fan-card {
-        width: 17rem;
-        height: auto;
-        aspect-ratio: 20 / 35;
+        width: 13rem;
+        height: 22rem;
     }
-
-    .fan-card-1 { transform: translateX(-12rem) translateY(3.8rem) rotate(-21deg) scale(0.7756); }
-    .fan-card-2 { transform: translateX(-8.5rem) translateY(2.1rem) rotate(-14deg) scale(0.8498); }
-    .fan-card-3 { transform: translateX(-4.2rem) translateY(0.7rem) rotate(-7deg) scale(0.9346); }
-    .fan-card-5 { transform: translateX(4.2rem) translateY(0.7rem) rotate(7deg) scale(0.9346); }
-    .fan-card-6 { transform: translateX(8.5rem) translateY(2.1rem) rotate(14deg) scale(0.8498); }
-    .fan-card-7 { transform: translateX(12rem) translateY(3.8rem) rotate(21deg) scale(0.7756); }
+    .fan-container {
+        height: 28rem;
+    }
 }
 
 /* Responsive — mobile */
 @media (max-width: 767px) {
     .gallery-fan {
-        padding: 80px 20px 100px;
+        padding: 80px 20px 40px;
     }
 
     .fan-container {
-        height: 28rem;
+        height: 24rem;
     }
 
     .fan-card {
-        width: 15rem;
-        height: auto;
-        aspect-ratio: 20 / 35;
+        width: 11rem;
+        height: 19rem;
     }
-
-    .fan-card-1 { transform: translateX(-8rem) translateY(3.8rem) rotate(-21deg) scale(0.7756); }
-    .fan-card-2 { transform: translateX(-5.8rem) translateY(2.1rem) rotate(-14deg) scale(0.8498); }
-    .fan-card-3 { transform: translateX(-3rem) translateY(0.7rem) rotate(-7deg) scale(0.9346); }
-    .fan-card-4 { transform: translateX(0) translateY(0) rotate(0deg) scale(1); }
-    .fan-card-5 { transform: translateX(3rem) translateY(0.7rem) rotate(7deg) scale(0.9346); }
-    .fan-card-6 { transform: translateX(5.8rem) translateY(2.1rem) rotate(14deg) scale(0.8498); }
-    .fan-card-7 { transform: translateX(8rem) translateY(3.8rem) rotate(21deg) scale(0.7756); }
 }
 
 /* Responsive — small mobile */
 @media (max-width: 479px) {
-    .fan-container { height: 22rem; }
-    .fan-card { width: 12rem; }
-
-    .fan-card-1 { transform: translateX(-6rem) translateY(3rem) rotate(-21deg) scale(0.7756); }
-    .fan-card-2 { transform: translateX(-4.2rem) translateY(1.6rem) rotate(-14deg) scale(0.8498); }
-    .fan-card-3 { transform: translateX(-2.2rem) translateY(0.5rem) rotate(-7deg) scale(0.9346); }
-    .fan-card-5 { transform: translateX(2.2rem) translateY(0.5rem) rotate(7deg) scale(0.9346); }
-    .fan-card-6 { transform: translateX(4.2rem) translateY(1.6rem) rotate(14deg) scale(0.8498); }
-    .fan-card-7 { transform: translateX(6rem) translateY(3rem) rotate(21deg) scale(0.7756); }
+    .fan-container { height: 20rem; }
+    .fan-card { width: 9rem; height: 15.5rem; }
 }
 
 /* --- Contact Section --- */
