@@ -1040,7 +1040,7 @@ button {
     align-items: center;
     width: 100%;
     max-width: 80rem;
-    height: 32rem;
+    height: 26rem;
     display: flex;
     position: relative;
     margin: 0 auto;
@@ -1053,7 +1053,7 @@ button {
     border-radius: 2.5rem;
     flex: none;
     width: 15rem;
-    height: 26rem;
+    height: 20rem;
     position: absolute;
     overflow: clip;
     opacity: 1;
@@ -1079,10 +1079,10 @@ button {
 @media (max-width: 991px) {
     .fan-card {
         width: 13rem;
-        height: 22rem;
+        height: 17.33rem;
     }
     .fan-container {
-        height: 28rem;
+        height: 22rem;
     }
 }
 
@@ -1098,15 +1098,15 @@ button {
 
     .fan-card {
         width: 8rem;
-        height: 13.5rem;
+        height: 10.67rem;
         border-radius: 1.5rem;
     }
 }
 
 /* Responsive — small mobile */
 @media (max-width: 479px) {
-    .fan-container { height: 17rem; }
-    .fan-card { width: 6.5rem; height: 11rem; border-radius: 1.2rem; }
+    .fan-container { height: 14rem; }
+    .fan-card { width: 6.5rem; height: 8.67rem; border-radius: 1.2rem; }
 }
 
 /* --- Contact Section --- */
@@ -1165,8 +1165,11 @@ button {
 
 .social-link:hover {
     transform: translateY(-4px) scale(1.1);
-    color: var(--primary);
-    box-shadow: 0 10px 24px var(--shadow-primary);
+    box-shadow: 0 10px 24px rgba(0,0,0,0.15);
+}
+
+.social-link svg {
+    display: block;
 }
 
 /* --- Footer --- */
