@@ -65,7 +65,7 @@ html { scrollbar-width: none; -ms-overflow-style: none; }
 /* --- Selection color --- */
 ::selection {
     background-color: var(--primary);
-    color: #0B1121;
+    color: var(--text);
 }
 
 html {
@@ -114,7 +114,7 @@ button {
     font-family: var(--font-display);
     font-size: 4rem;
     font-weight: 800;
-    color: #0B1121;
+    color: var(--text);
     animation: pulseScale 0.8s ease infinite alternate;
 }
 
@@ -358,7 +358,7 @@ button {
     font-family: var(--font-heading);
     font-weight: 600;
     font-size: 1.05rem;
-    color: #0B1121;
+    color: var(--text);
     background: var(--primary);
     padding: 16px 36px;
     border-radius: 50px;
@@ -502,7 +502,7 @@ button {
     font-family: var(--font-display);
     font-size: 1.05rem;
     font-weight: 700;
-    color: #0B1121;
+    color: var(--text);
     letter-spacing: 0.02em;
     text-transform: uppercase;
 }
@@ -602,7 +602,7 @@ button {
 .filter-btn.active {
     background: var(--primary);
     border-color: var(--primary);
-    color: #0B1121;
+    color: var(--text);
 }
 
 .work-grid {
@@ -807,13 +807,13 @@ button {
 }
 
 .showcase-grid .section-title {
-    color: #F1F5F9;
+    color: var(--text);
 }
 
 .showcase-subtitle {
     font-family: var(--font-heading);
     font-size: 1.1rem;
-    color: #94A3B8;
+    color: var(--text-secondary);
     text-align: center;
 }
 
@@ -867,7 +867,7 @@ button {
 }
 
 .showcase-frame.is-base {
-    color: #2A3A5C;
+    color: var(--border);
 }
 
 .showcase-frame.is-overlay {
@@ -952,7 +952,7 @@ button {
     font-family: var(--font-heading);
     font-size: 0.8rem;
     font-weight: 500;
-    color: #94A3B8;
+    color: var(--text-secondary);
     letter-spacing: 0.02em;
 }
 
@@ -1008,7 +1008,7 @@ button {
     font-family: var(--font-display);
     font-size: clamp(2.2rem, 4.5vw, 3.2rem);
     font-weight: 800;
-    color: #F1F5F9;
+    color: var(--text);
     margin-bottom: 16px;
     letter-spacing: -0.02em;
 }
@@ -1016,7 +1016,7 @@ button {
 .gallery-fan-subtitle {
     font-family: var(--font-heading);
     font-size: 1.1rem;
-    color: #94A3B8;
+    color: var(--text-secondary);
 }
 
 /*
@@ -1159,6 +1159,10 @@ button {
 
 .social-link svg {
     display: block;
+}
+
+.social-github {
+    color: var(--text);
 }
 
 /* --- Footer --- */
