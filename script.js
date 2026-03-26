@@ -211,7 +211,7 @@ updateShapes();
     // Col 0 & 2 (odd columns): same offset & speed
     // Col 1 & 3 (even columns): different offset & speed
     const offsets = [0, 6, 0, 6];   // initial Y offset in rem
-    const speeds  = [3, 6, 3, 6];   // how far they travel (parallax amount)
+    const speeds  = [2, 8, 2, 8];   // how far they travel (parallax amount)
 
     columns.forEach((colItems, colIndex) => {
         if (offsets[colIndex] > 0) {
