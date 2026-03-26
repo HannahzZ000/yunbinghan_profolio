@@ -46,16 +46,16 @@
     --accent: #C4B5FD;
     --yellow: #FCD34D;
     --green: #6EE7B7;
-    --bg: #0B1121;
-    --bg-secondary: #151F38;
-    --surface: #1A2542;
+    --bg: #1A1A1A;
+    --bg-secondary: #222222;
+    --surface: #2A2A2A;
     --text: #F1F5F9;
     --text-secondary: #94A3B8;
     --border: #2A3A5C;
     --shadow: rgba(0, 0, 0, 0.4);
     --shadow-hover: rgba(0, 0, 0, 0.6);
     --shadow-primary: rgba(85, 216, 255, 0.15);
-    --nav-bg: rgba(11, 17, 33, 0.9);
+    --nav-bg: rgba(26, 26, 26, 0.9);
 }
 
 /* --- Hidden scrollbar --- */
@@ -306,7 +306,7 @@ button {
     position: relative;
     z-index: 2;
     text-align: center;
-    max-width: 900px;
+    max-width: 1100px;
 }
 
 .hero-badge {
@@ -335,7 +335,7 @@ button {
 }
 
 .name-highlight-wrap {
-    display: block;
+    display: inline;
 }
 
 .name-highlight {
@@ -516,7 +516,7 @@ button {
 .marquee-dot {
     width: 8px;
     height: 8px;
-    background: #0B1121;
+    background: #1A1A1A;
     border-radius: 50%;
     display: inline-block;
     flex-shrink: 0;
@@ -797,13 +797,13 @@ button {
 /* --- Showcase Grid Section (bento grid inspired by landonorris.com) --- */
 .showcase-grid {
     padding: 120px 0 80px;
-    background: #0B1121;
+    background: #1A1A1A;
     position: relative;
     overflow: hidden;
 }
 
 [data-theme="dark"] .showcase-grid {
-    background: #060B18;
+    background: #111111;
 }
 
 .showcase-container {
@@ -999,13 +999,13 @@ button {
 /* --- Gallery Fan Section --- */
 .gallery-fan {
     padding: 120px 48px 60px;
-    background: #0B1121;
+    background: #1A1A1A;
     text-align: center;
     position: relative;
 }
 
 [data-theme="dark"] .gallery-fan {
-    background: #060B18;
+    background: #111111;
 }
 
 .gallery-fan-header {
