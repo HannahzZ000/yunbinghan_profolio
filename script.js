@@ -324,22 +324,31 @@ updateShapes();
 // --- Showcase Grid Parallax (GSAP ScrollTrigger — ported from landonorris.com) ---
 (function initShowcaseParallax() {
     const grid = document.querySelector('[data-showcase-grid]');
-    if (!grid || window.innerWidth < 992) return;
+    if (!grid) return;
 
     const items = grid.querySelectorAll('.showcase-card');
     if (!items.length) return;
 
-    const columns = [[], [], [], []];
+    var isWide = window.innerWidth >= 992;
+    var numCols = isWide ? 4 : 2;
 
-    // Distribute items round-robin into 4 columns
+    var columns = [];
+    for (var c = 0; c < numCols; c++) columns.push([]);
+
+    // Distribute items round-robin into columns
     items.forEach((item, index) => {
-        columns[index % 4].push(item);
+        columns[index % numCols].push(item);
     });
 
-    // Col 0 & 2 (odd columns): same offset & speed
-    // Col 1 & 3 (even columns): different offset & speed
-    const offsets = [0, 10, 0, 10];  // initial Y offset in rem
-    const speeds  = [2, 8, 2, 8];   // how far they travel (parallax amount)
+    // Different speeds per column
+    var offsets, speeds;
+    if (isWide) {
+        offsets = [0, 10, 0, 10];
+        speeds  = [2, 8, 2, 8];
+    } else {
+        offsets = [0, 6];
+        speeds  = [1, 5];
+    }
 
     columns.forEach((colItems, colIndex) => {
         if (offsets[colIndex] > 0) {
