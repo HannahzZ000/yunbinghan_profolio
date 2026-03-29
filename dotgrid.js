@@ -113,9 +113,14 @@
     if (lastRowCard) {
       var rect = lastRowCard.getBoundingClientRect();
       var arcY = rect.bottom + 30;
-      if (arcY > 0 && arcY < canvas.height + 200) {
-        var w = canvas.width;
-        var h = canvas.height;
+      var w = canvas.width;
+      var h = canvas.height;
+      if (arcY <= 0) {
+        // Cards scrolled above viewport — cover entire canvas
+        ctx.fillStyle = colors.arc;
+        ctx.fillRect(0, 0, w, h);
+      } else if (arcY < h + 200) {
+        // Arc visible — draw curve and fill below
         ctx.beginPath();
         ctx.moveTo(0, arcY);
         ctx.quadraticCurveTo(w / 2, arcY + 60, w, arcY);
