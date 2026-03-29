@@ -1085,7 +1085,7 @@ button {
 
 /* --- Gallery Fan Section --- */
 .gallery-fan {
-    padding: 120px 48px 60px;
+    padding: 160px 48px 40px;
     background: var(--section-bg);
     text-align: center;
     position: relative;
@@ -1094,7 +1094,7 @@ button {
 }
 
 .gallery-fan-header {
-    margin-bottom: 60px;
+    margin-bottom: 40px;
     position: relative;
     z-index: 2;
 }
