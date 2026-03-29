@@ -111,17 +111,31 @@
         forceY: 0,
     };
 
-    document.addEventListener('mousemove', (e) => {
+    function handlePointerMove(clientX, clientY) {
         autoTraj.lastRealMove = Date.now();
         if (autoTraj.active) {
             autoTraj.active = false;
         }
         mouse.px = mouse.x; mouse.py = mouse.y;
-        mouse.x = (e.clientX / window.innerWidth - 0.5) * 2;
-        mouse.y = (e.clientY / window.innerHeight - 0.5) * 2;
-        fluidMouse.x = (e.clientX / window.innerWidth) * 2 - 1;
-        fluidMouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
+        mouse.x = (clientX / window.innerWidth - 0.5) * 2;
+        mouse.y = (clientY / window.innerHeight - 0.5) * 2;
+        fluidMouse.x = (clientX / window.innerWidth) * 2 - 1;
+        fluidMouse.y = -(clientY / window.innerHeight) * 2 + 1;
+    }
+
+    document.addEventListener('mousemove', (e) => {
+        handlePointerMove(e.clientX, e.clientY);
     });
+
+    document.addEventListener('touchmove', (e) => {
+        var t = e.touches[0];
+        if (t) handlePointerMove(t.clientX, t.clientY);
+    }, { passive: true });
+
+    document.addEventListener('touchstart', (e) => {
+        var t = e.touches[0];
+        if (t) handlePointerMove(t.clientX, t.clientY);
+    }, { passive: true });
 
     // ── Scroll ──
     let scrollProgress = 0;
