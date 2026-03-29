@@ -60,8 +60,10 @@
   }
 
   function resize() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    // Use clientWidth/Height (CSS-computed from 100vw/100vh) rather than
+    // window.innerHeight which excludes the area behind mobile browser chrome
+    canvas.width = canvas.clientWidth || window.innerWidth;
+    canvas.height = canvas.clientHeight || window.innerHeight;
     cols = Math.ceil(canvas.width / SPACING) + 1;
     rows = Math.ceil(canvas.height / SPACING) + 1;
   }
