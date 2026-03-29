@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Work — Yunbing Han</title>
+    <meta name="theme-color" content="#FAFAFA" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#111111" media="(prefers-color-scheme: dark)">
+    <link rel="stylesheet" href="styles.css?v=312">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Merriweather:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Page load transition overlay -->
+    <div class="page-transition" id="pageTransition">
+        <span class="transition-text">H</span>
+    </div>
+
+    <!-- Custom cursor -->
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-follower" id="cursorFollower"></div>
+
+    <!-- Navigation -->
+    <nav class="nav" id="nav">
+        <a href="index.html" class="nav-logo" data-hover><span class="logo-line-serif">HANNAH</span><span class="logo-line-sans">YUNBING</span></a>
+        <div class="nav-links">
+            <a href="work.html" data-hover>Work</a>
+            <a href="index.html#contact" data-hover>Contact</a>
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode" data-hover>
+                <svg class="icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                </svg>
+                <svg class="icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Work Section -->
+    <section class="work" id="work" data-section-theme="light" style="padding-top: 160px;">
+        <div class="section-header">
+            <h2 class="section-title split-text">Selected Work</h2>
+            <div class="filters">
+                <button class="filter-btn active" data-filter="all" data-hover>All</button>
+                <button class="filter-btn" data-filter="product" data-hover>Products</button>
+                <button class="filter-btn" data-filter="uiux" data-hover>UI/UX</button>
+                <button class="filter-btn" data-filter="xr" data-hover>XR Design</button>
+                <button class="filter-btn" data-filter="research" data-hover>Research</button>
+                <button class="filter-btn" data-filter="art" data-hover>Art</button>
+            </div>
+        </div>
+
+        <div class="work-grid">
+            <a href="#" class="work-card" data-category="product" data-hover>
+                <div class="card-image" style="background: linear-gradient(135deg, #55D8FF, #A78BFA);">
+                    <span class="card-placeholder">Your Image</span>
+                    <div class="card-image-overlay"></div>
+                </div>
+                <div class="card-info">
+                    <span class="card-category">Product</span>
+                    <h3 class="card-title">Project Name</h3>
+                    <p class="card-desc">Brief description of the project and your role.</p>
+                    <span class="card-arrow">&rarr;</span>
+                </div>
+            </a>
+
+            <a href="#" class="work-card" data-category="uiux" data-hover>
+                <div class="card-image" style="background: linear-gradient(135deg, #FF6B9D, #C084FC);">
+                    <span class="card-placeholder">Your Image</span>
+                    <div class="card-image-overlay"></div>
+                </div>
+                <div class="card-info">
+                    <span class="card-category">UI/UX</span>
+                    <h3 class="card-title">Project Name</h3>
+                    <p class="card-desc">Brief description of the project and your role.</p>
+                    <span class="card-arrow">&rarr;</span>
+                </div>
+            </a>
+
+            <a href="#" class="work-card" data-category="xr" data-hover>
+                <div class="card-image" style="background: linear-gradient(135deg, #55D8FF, #34D399);">
+                    <span class="card-placeholder">Your Image</span>
+                    <div class="card-image-overlay"></div>
+                </div>
+                <div class="card-info">
+                    <span class="card-category">XR Design</span>
+                    <h3 class="card-title">Project Name</h3>
+                    <p class="card-desc">Brief description of the project and your role.</p>
+                    <span class="card-arrow">&rarr;</span>
+                </div>
+            </a>
+
+            <a href="#" class="work-card" data-category="research" data-hover>
+                <div class="card-image" style="background: linear-gradient(135deg, #34D399, #55D8FF);">
+                    <span class="card-placeholder">Your Image</span>
+                    <div class="card-image-overlay"></div>
+                </div>
+                <div class="card-info">
+                    <span class="card-category">Research</span>
+                    <h3 class="card-title">Project Name</h3>
+                    <p class="card-desc">Brief description of the project and your role.</p>
+                    <span class="card-arrow">&rarr;</span>
+                </div>
+            </a>
+
+            <a href="#" class="work-card" data-category="art" data-hover>
+                <div class="card-image" style="background: linear-gradient(135deg, #FBBF24, #FF6B9D);">
+                    <span class="card-placeholder">Your Image</span>
+                    <div class="card-image-overlay"></div>
+                </div>
+                <div class="card-info">
+                    <span class="card-category">Art</span>
+                    <h3 class="card-title">Project Name</h3>
+                    <p class="card-desc">Brief description of the project and your role.</p>
+                    <span class="card-arrow">&rarr;</span>
+                </div>
+            </a>
+
+            <a href="#" class="work-card" data-category="product" data-hover>
+                <div class="card-image" style="background: linear-gradient(135deg, #C084FC, #55D8FF);">
+                    <span class="card-placeholder">Your Image</span>
+                    <div class="card-image-overlay"></div>
+                </div>
+                <div class="card-info">
+                    <span class="card-category">Product</span>
+                    <h3 class="card-title">Project Name</h3>
+                    <p class="card-desc">Brief description of the project and your role.</p>
+                    <span class="card-arrow">&rarr;</span>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2026 Yunbing Han. Made with creativity.</p>
+    </footer>
+
+    <!-- GSAP + ScrollTrigger -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+
+        // --- Page Load Transition ---
+        const pageTransition = document.getElementById('pageTransition');
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                pageTransition.classList.add('done');
+            }, 600);
+        });
+
+        // --- Theme Toggle (Day/Night) ---
+        const themeToggle = document.getElementById('themeToggle');
+        const html = document.documentElement;
+
+        function setThemeColor(dark) {
+            const color = dark ? '#111111' : '#FAFAFA';
+            document.querySelectorAll('meta[name="theme-color"]').forEach(m => m.setAttribute('content', color));
+        }
+
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            html.setAttribute('data-theme', 'dark');
+            setThemeColor(true);
+        } else if (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            html.setAttribute('data-theme', 'dark');
+            setThemeColor(true);
+        }
+
+        themeToggle.addEventListener('click', () => {
+            const isDark = html.getAttribute('data-theme') === 'dark';
+            if (isDark) {
+                html.removeAttribute('data-theme');
+                localStorage.setItem('theme', 'light');
+                setThemeColor(false);
+            } else {
+                html.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+                setThemeColor(true);
+            }
+        });
+
+        // --- Custom Cursor ---
+        const cursor = document.getElementById('cursor');
+        const cursorFollower = document.getElementById('cursorFollower');
+        let mouseX = 0, mouseY = 0;
+        let followerX = 0, followerY = 0;
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            cursor.style.left = mouseX + 'px';
+            cursor.style.top = mouseY + 'px';
+        });
+
+        function updateFollower() {
+            followerX += (mouseX - followerX) * 0.12;
+            followerY += (mouseY - followerY) * 0.12;
+            cursorFollower.style.left = followerX + 'px';
+            cursorFollower.style.top = followerY + 'px';
+            requestAnimationFrame(updateFollower);
+        }
+        updateFollower();
+
+        // Hover effect on interactive elements
+        document.querySelectorAll('[data-hover]').forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                cursor.classList.add('hovering');
+                cursorFollower.classList.add('hovering');
+            });
+            el.addEventListener('mouseleave', () => {
+                cursor.classList.remove('hovering');
+                cursorFollower.classList.remove('hovering');
+            });
+        });
+
+        // --- Navigation ---
+        const nav = document.querySelector('.nav');
+        let lastScrollY = 0;
+
+        window.addEventListener('scroll', () => {
+            const scroll = window.scrollY;
+            if (scroll > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+
+            if (scroll > lastScrollY && scroll > 200) {
+                nav.classList.add('nav-hidden');
+            } else {
+                nav.classList.remove('nav-hidden');
+            }
+            lastScrollY = scroll;
+        });
+
+        // --- Split Text Animation ---
+        document.querySelectorAll('.split-text').forEach(el => {
+            const delay = parseInt(el.dataset.delay) || 0;
+            const nodes = [];
+            el.childNodes.forEach(node => {
+                if (node.nodeType === Node.TEXT_NODE) {
+                    [...node.textContent].forEach(ch => nodes.push({ char: ch, classes: [] }));
+                } else if (node.nodeType === Node.ELEMENT_NODE) {
+                    const cls = [...node.classList];
+                    [...node.textContent].forEach(ch => nodes.push({ char: ch, classes: cls }));
+                }
+            });
+            el.innerHTML = '';
+            nodes.forEach((n, i) => {
+                const span = document.createElement('span');
+                span.classList.add('char', ...n.classes);
+                span.textContent = n.char === ' ' ? '\u00A0' : n.char;
+                span.style.transitionDelay = `${delay + i * 25}ms`;
+                el.appendChild(span);
+            });
+        });
+
+        // --- Scroll Reveal (IntersectionObserver) ---
+        const revealObserver = new IntersectionObserver(
+            (entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    } else {
+                        entry.target.classList.remove('visible');
+                    }
+                });
+            },
+            { threshold: 0.15, rootMargin: '0px 0px -60px 0px' }
+        );
+
+        document.querySelectorAll('.split-text, .reveal-up, .work-card').forEach(el => {
+            revealObserver.observe(el);
+        });
+
+        // --- Work Grid Filter ---
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const workCards = document.querySelectorAll('.work-card');
+
+        filterButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterButtons.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                const filter = btn.dataset.filter;
+                workCards.forEach(card => {
+                    if (filter === 'all' || card.dataset.category === filter) {
+                        card.classList.remove('hidden');
+                    } else {
+                        card.classList.add('hidden');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

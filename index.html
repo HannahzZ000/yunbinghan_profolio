@@ -3,18 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>history.scrollRestoration='manual';window.scrollTo(0,0);</script>
     <title>Yunbing Han — Designer & Creator</title>
     <meta name="theme-color" content="#FAFAFA" media="(prefers-color-scheme: light)">
     <meta name="theme-color" content="#111111" media="(prefers-color-scheme: dark)">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css?v=312">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Merriweather:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&display=swap" rel="stylesheet">
+
 </head>
 <body>
     <!-- Page load transition overlay -->
     <div class="page-transition" id="pageTransition">
-        <span class="transition-text">YH</span>
+        <span class="transition-text">H</span>
     </div>
 
     <!-- Custom cursor -->
@@ -23,10 +25,9 @@
 
     <!-- Navigation -->
     <nav class="nav" id="nav">
-        <a href="#" class="nav-logo" data-hover>YH</a>
+        <a href="#" class="nav-logo" data-hover><span class="logo-line-serif">HANNAH</span><span class="logo-line-sans">YUNBING</span></a>
         <div class="nav-links">
-            <a href="#work" data-hover>Work</a>
-            <a href="#about" data-hover>About</a>
+            <a href="work.html" data-hover>Work</a>
             <a href="#contact" data-hover>Contact</a>
             <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode" data-hover>
                 <svg class="icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -49,153 +50,31 @@
 
     <!-- Hero Section -->
     <section class="hero" id="hero" data-section-theme="light">
+        <canvas id="heroGL" class="hero-gl-canvas"></canvas>
+        <canvas id="heroModelGL" class="hero-gl-canvas hero-model-canvas"></canvas>
         <div class="hero-content">
-            <div class="hero-badge split-text" data-delay="0">Designer & Creator</div>
-            <h1 class="hero-title">
-                <span class="name-highlight" style="display:inline-flex;flex-wrap:wrap;justify-content:center;"><span class="split-text" data-delay="100" style="white-space:nowrap;">Yunbing</span><span style="width:0.3em;"></span><span class="split-text" data-delay="250" style="white-space:nowrap;">Han</span></span>
-            </h1>
-            <p class="hero-subtitle split-text" data-delay="400">
-                Crafting playful digital experiences across UI/UX, XR, Products, Research & Art
-            </p>
-            <a href="#work" class="hero-cta magnetic" data-hover>
-                <span>See my work</span>
-                <span class="arrow">&darr;</span>
-            </a>
         </div>
     </section>
 
-    <!-- Work Section -->
-    <section class="work" id="work" data-section-theme="light">
-        <div class="section-header">
-            <h2 class="section-title split-text">Selected Work</h2>
-            <div class="filters">
-                <button class="filter-btn active" data-filter="all" data-hover>All</button>
-                <button class="filter-btn" data-filter="product" data-hover>Products</button>
-                <button class="filter-btn" data-filter="uiux" data-hover>UI/UX</button>
-                <button class="filter-btn" data-filter="xr" data-hover>XR Design</button>
-                <button class="filter-btn" data-filter="research" data-hover>Research</button>
-                <button class="filter-btn" data-filter="art" data-hover>Art</button>
-            </div>
-        </div>
-
-        <div class="work-grid">
-            <a href="#" class="work-card" data-category="product" data-hover>
-                <div class="card-image" style="background: linear-gradient(135deg, #55D8FF, #A78BFA);">
-                    <span class="card-placeholder">Your Image</span>
-                    <div class="card-image-overlay"></div>
-                </div>
-                <div class="card-info">
-                    <span class="card-category">Product</span>
-                    <h3 class="card-title">Project Name</h3>
-                    <p class="card-desc">Brief description of the project and your role.</p>
-                    <span class="card-arrow">&rarr;</span>
-                </div>
-            </a>
-
-            <a href="#" class="work-card" data-category="uiux" data-hover>
-                <div class="card-image" style="background: linear-gradient(135deg, #FF6B9D, #C084FC);">
-                    <span class="card-placeholder">Your Image</span>
-                    <div class="card-image-overlay"></div>
-                </div>
-                <div class="card-info">
-                    <span class="card-category">UI/UX</span>
-                    <h3 class="card-title">Project Name</h3>
-                    <p class="card-desc">Brief description of the project and your role.</p>
-                    <span class="card-arrow">&rarr;</span>
-                </div>
-            </a>
-
-            <a href="#" class="work-card" data-category="xr" data-hover>
-                <div class="card-image" style="background: linear-gradient(135deg, #55D8FF, #34D399);">
-                    <span class="card-placeholder">Your Image</span>
-                    <div class="card-image-overlay"></div>
-                </div>
-                <div class="card-info">
-                    <span class="card-category">XR Design</span>
-                    <h3 class="card-title">Project Name</h3>
-                    <p class="card-desc">Brief description of the project and your role.</p>
-                    <span class="card-arrow">&rarr;</span>
-                </div>
-            </a>
-
-            <a href="#" class="work-card" data-category="research" data-hover>
-                <div class="card-image" style="background: linear-gradient(135deg, #34D399, #55D8FF);">
-                    <span class="card-placeholder">Your Image</span>
-                    <div class="card-image-overlay"></div>
-                </div>
-                <div class="card-info">
-                    <span class="card-category">Research</span>
-                    <h3 class="card-title">Project Name</h3>
-                    <p class="card-desc">Brief description of the project and your role.</p>
-                    <span class="card-arrow">&rarr;</span>
-                </div>
-            </a>
-
-            <a href="#" class="work-card" data-category="art" data-hover>
-                <div class="card-image" style="background: linear-gradient(135deg, #FBBF24, #FF6B9D);">
-                    <span class="card-placeholder">Your Image</span>
-                    <div class="card-image-overlay"></div>
-                </div>
-                <div class="card-info">
-                    <span class="card-category">Art</span>
-                    <h3 class="card-title">Project Name</h3>
-                    <p class="card-desc">Brief description of the project and your role.</p>
-                    <span class="card-arrow">&rarr;</span>
-                </div>
-            </a>
-
-            <a href="#" class="work-card" data-category="product" data-hover>
-                <div class="card-image" style="background: linear-gradient(135deg, #C084FC, #55D8FF);">
-                    <span class="card-placeholder">Your Image</span>
-                    <div class="card-image-overlay"></div>
-                </div>
-                <div class="card-info">
-                    <span class="card-category">Product</span>
-                    <h3 class="card-title">Project Name</h3>
-                    <p class="card-desc">Brief description of the project and your role.</p>
-                    <span class="card-arrow">&rarr;</span>
-                </div>
-            </a>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section class="about" id="about" data-section-theme="dark">
-        <div class="about-container">
-            <div class="about-photo">
-                <div class="photo-placeholder">Your Photo</div>
-            </div>
-            <div class="about-content">
-                <h2 class="section-title split-text">About Me</h2>
-                <p class="about-text reveal-up">
-                    I'm Yunbing Han, a designer and creator passionate about building
-                    delightful digital experiences. My work spans UI/UX design, XR
-                    (extended reality) experiences, product design, academic research,
-                    and art.
-                </p>
-                <p class="about-text reveal-up">
-                    I believe great design should feel playful and intuitive — making
-                    complex things simple and boring things exciting.
-                </p>
-                <div class="skills reveal-up">
-                    <span class="skill" data-hover>UI/UX Design</span>
-                    <span class="skill" data-hover>XR / Spatial Design</span>
-                    <span class="skill" data-hover>Product Design</span>
-                    <span class="skill" data-hover>Prototyping</span>
-                    <span class="skill" data-hover>User Research</span>
-                    <span class="skill" data-hover>Visual Design</span>
-                    <span class="skill" data-hover>Illustration</span>
-                </div>
-            </div>
+    <!-- Title Roles Section (below hero) -->
+    <section class="titles-section">
+        <div class="footer-titles-block">
+            <span class="hero-title-line ht-sans">CREATER</span>
+            <span class="hero-title-line ht-serif">INTERACTION DESIGNER</span>
+            <span class="hero-title-line ht-sans">UX/UI DESIGNER</span>
+            <span class="hero-title-line ht-serif">VIBE CODING</span>
+            <span class="hero-title-line ht-sans">RESEARCHER</span>
+            <span class="hero-title-line ht-sans">XR DESIGNER</span>
+            <span class="hero-title-line ht-serif">ARTIST</span>
+            <span class="hero-title-line ht-sans">INDEPENDENT DEVELOPER</span>
         </div>
     </section>
 
     <!-- Showcase Grid Section (bento grid inspired by landonorris.com helmets) -->
     <section class="showcase-grid" id="showcase">
         <div class="showcase-container">
-            <div class="section-header">
-                <h2 class="section-title split-text">Creative Showcase</h2>
-                <p class="showcase-subtitle reveal-up">A curated collection of projects and explorations</p>
+            <div class="section-header" style="display:none;">
+                <h2 class="section-title split-text">Creative <span class="serif">Showcase</span></h2>
             </div>
             <div class="showcase-spacer"></div>
             <div data-showcase-grid role="list" class="showcase-bento">
@@ -348,6 +227,177 @@
         </div>
     </section>
 
+    <!-- Mac OS X Panther Window Section -->
+    <section class="panther-section" id="pantherSection">
+        <!-- macOS Folder -->
+        <div class="mac-folder" id="macFolder" data-hover>
+            <div class="mac-folder-back">
+                <div class="mac-folder-tab"></div>
+            </div>
+            <div class="mac-folder-front" id="macFolderFront">
+                <div class="mac-folder-tab-front"></div>
+            </div>
+            <span class="mac-folder-label">My Research</span>
+        </div>
+        <div class="panther-window" id="pantherWindow">
+            <!-- Title Bar -->
+            <div class="panther-titlebar">
+                <div class="panther-traffic-lights">
+                    <button class="panther-btn panther-btn-close" aria-label="Close">
+                        <svg viewBox="0 0 12 12" width="8" height="8"><path d="M3.5 3.5l5 5M8.5 3.5l-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                    </button>
+                    <button class="panther-btn panther-btn-minimize" aria-label="Minimize">
+                        <svg viewBox="0 0 12 12" width="8" height="8"><path d="M2.5 6h7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                    </button>
+                    <button class="panther-btn panther-btn-maximize" aria-label="Maximize">
+                        <svg viewBox="0 0 12 12" width="8" height="8"><path d="M3 3h6v6H3z" stroke="currentColor" stroke-width="1.2" fill="none" stroke-linejoin="round"/></svg>
+                    </button>
+                </div>
+                <span class="panther-title-text">Explore With Me</span>
+            </div>
+            <!-- Toolbar -->
+            <div class="panther-toolbar">
+                <div class="panther-toolbar-group">
+                    <div class="panther-dropdown-wrap" id="pantherStylesWrap">
+                        <button class="panther-toolbar-btn panther-dropdown" id="pantherStylesBtn">
+                            <span>Times New Roman</span>
+                            <svg viewBox="0 0 10 6" width="8" height="5"><path d="M1 1l4 4 4-4" stroke="#555" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </button>
+                        <div class="panther-menu" id="pantherStylesMenu">
+                            <div class="panther-menu-item panther-menu-active" data-style="times">
+                                <span class="panther-menu-check">&#10003;</span>
+                                <span class="panther-menu-label" style="font-family: 'Times New Roman', Times, serif; font-size: 12px;">Times New Roman</span>
+                                <span class="panther-menu-preview" style="font-family: 'Times New Roman', Times, serif;">Aa</span>
+                            </div>
+                            <div class="panther-menu-separator"></div>
+                            <div class="panther-menu-item" data-style="default">
+                                <span class="panther-menu-check">&#10003;</span>
+                                <span class="panther-menu-label" style="font-family: 'Lucida Grande', Helvetica, sans-serif; font-size: 12px;">Default</span>
+                                <span class="panther-menu-preview">Aa</span>
+                            </div>
+                            <div class="panther-menu-item" data-style="typewriter">
+                                <span class="panther-menu-check">&#10003;</span>
+                                <span class="panther-menu-label" style="font-family: 'Courier New', Courier, monospace; font-size: 12px;">Typewriter</span>
+                                <span class="panther-menu-preview" style="font-family: 'Courier New', monospace;">Aa</span>
+                            </div>
+                            <div class="panther-menu-item" data-style="elegant">
+                                <span class="panther-menu-check">&#10003;</span>
+                                <span class="panther-menu-label" style="font-family: 'Merriweather', Georgia, serif; font-size: 11px; font-style: italic;">Elegant</span>
+                                <span class="panther-menu-preview" style="font-family: 'Merriweather', Georgia, serif; font-style: italic;">Aa</span>
+                            </div>
+                            <div class="panther-menu-item" data-style="comic">
+                                <span class="panther-menu-check">&#10003;</span>
+                                <span class="panther-menu-label" style="font-family: 'Comic Sans MS', 'Chalkboard SE', cursive; font-size: 12px;">Playful</span>
+                                <span class="panther-menu-preview" style="font-family: 'Comic Sans MS', cursive;">Aa</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panther-toolbar-divider"></div>
+                    <button class="panther-toolbar-icon panther-icon-active" data-align="left" aria-label="Align Left">
+                        <svg viewBox="0 0 16 14" width="14" height="12"><rect x="1" y="1" width="10" height="2" rx="0.5" fill="currentColor"/><rect x="1" y="5" width="14" height="2" rx="0.5" fill="currentColor"/><rect x="1" y="9" width="10" height="2" rx="0.5" fill="currentColor"/></svg>
+                    </button>
+                    <button class="panther-toolbar-icon" data-align="center" aria-label="Align Center">
+                        <svg viewBox="0 0 16 14" width="14" height="12"><rect x="3" y="1" width="10" height="2" rx="0.5" fill="currentColor"/><rect x="1" y="5" width="14" height="2" rx="0.5" fill="currentColor"/><rect x="3" y="9" width="10" height="2" rx="0.5" fill="currentColor"/></svg>
+                    </button>
+                    <button class="panther-toolbar-icon" data-align="right" aria-label="Align Right">
+                        <svg viewBox="0 0 16 14" width="14" height="12"><rect x="5" y="1" width="10" height="2" rx="0.5" fill="currentColor"/><rect x="1" y="5" width="14" height="2" rx="0.5" fill="currentColor"/><rect x="5" y="9" width="10" height="2" rx="0.5" fill="currentColor"/></svg>
+                    </button>
+                    <div class="panther-toolbar-divider"></div>
+                    <div class="panther-dropdown-wrap" id="pantherSpacingWrap">
+                        <button class="panther-toolbar-btn panther-dropdown" id="pantherSpacingBtn">
+                            <span>Spacing</span>
+                            <svg viewBox="0 0 10 6" width="8" height="5"><path d="M1 1l4 4 4-4" stroke="#555" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </button>
+                        <div class="panther-menu" id="pantherSpacingMenu">
+                            <div class="panther-menu-item" data-spacing="1">
+                                <span class="panther-menu-check">&#10003;</span>
+                                <span class="panther-menu-label">Single</span>
+                                <span class="panther-menu-shortcut">1.0</span>
+                            </div>
+                            <div class="panther-menu-item panther-menu-active" data-spacing="1.5">
+                                <span class="panther-menu-check">&#10003;</span>
+                                <span class="panther-menu-label">1.5 Lines</span>
+                                <span class="panther-menu-shortcut">1.5</span>
+                            </div>
+                            <div class="panther-menu-item" data-spacing="2">
+                                <span class="panther-menu-check">&#10003;</span>
+                                <span class="panther-menu-label">Double</span>
+                                <span class="panther-menu-shortcut">2.0</span>
+                            </div>
+                            <div class="panther-menu-separator"></div>
+                            <div class="panther-menu-item" data-spacing="2.5">
+                                <span class="panther-menu-check">&#10003;</span>
+                                <span class="panther-menu-label">Relaxed</span>
+                                <span class="panther-menu-shortcut">2.5</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panther-toolbar-divider"></div>
+                    <div class="panther-dropdown-wrap" id="pantherCiteWrap">
+                        <button class="panther-toolbar-btn panther-dropdown" id="pantherCiteBtn">
+                            <span>Citation Format</span>
+                            <svg viewBox="0 0 10 6" width="8" height="5"><path d="M1 1l4 4 4-4" stroke="#555" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </button>
+                        <div class="panther-menu" id="pantherCiteMenu">
+                            <div class="panther-menu-item panther-menu-active" data-cite="chicago">
+                                <span class="panther-menu-check">&#10003;</span>
+                                <span class="panther-menu-label">Chicago</span>
+                            </div>
+                            <div class="panther-menu-separator"></div>
+                            <div class="panther-menu-item" data-cite="apa">
+                                <span class="panther-menu-check">&#10003;</span>
+                                <span class="panther-menu-label">APA 7th</span>
+                            </div>
+                            <div class="panther-menu-item" data-cite="mla">
+                                <span class="panther-menu-check">&#10003;</span>
+                                <span class="panther-menu-label">MLA 9th</span>
+                            </div>
+                            <div class="panther-menu-item" data-cite="ieee">
+                                <span class="panther-menu-check">&#10003;</span>
+                                <span class="panther-menu-label">IEEE</span>
+                            </div>
+                            <div class="panther-menu-item" data-cite="harvard">
+                                <span class="panther-menu-check">&#10003;</span>
+                                <span class="panther-menu-label">Harvard</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panther-toolbar-group panther-toolbar-right">
+                    <button class="panther-toolbar-icon" aria-label="Arrows">
+                        <svg viewBox="0 0 14 12" width="12" height="10"><polygon points="3,1 7,6 3,11" fill="currentColor"/><polygon points="8,1 12,6 8,11" fill="currentColor"/></svg>
+                    </button>
+                    <button class="panther-toolbar-icon" aria-label="Diamond">
+                        <svg viewBox="0 0 10 10" width="10" height="10"><rect x="2" y="2" width="6" height="6" rx="0.5" fill="currentColor" transform="rotate(45 5 5)"/></svg>
+                    </button>
+                    <button class="panther-toolbar-icon" aria-label="Diamond filled">
+                        <svg viewBox="0 0 10 10" width="10" height="10"><rect x="2" y="2" width="6" height="6" rx="0.5" fill="currentColor" transform="rotate(45 5 5)"/></svg>
+                    </button>
+                </div>
+            </div>
+            <!-- Ruler -->
+            <div class="panther-ruler">
+                <div class="panther-ruler-track">
+                    <div class="panther-ruler-numbers">
+                        <span style="left: 0%;">0</span>
+                        <span style="left: 16.66%;">1</span>
+                        <span style="left: 33.33%;">2</span>
+                        <span style="left: 50%;">3</span>
+                        <span style="left: 66.66%;">4</span>
+                        <span style="left: 83.33%;">5</span>
+                        <span style="left: 100%;">6</span>
+                    </div>
+                </div>
+            </div>
+            <!-- Content Area -->
+            <div class="panther-content" id="pantherContent">Han, Yunbing. 2025. &ldquo;EEG-Driven Dynamic Immersion Design for XR Gaming Experiences.&rdquo; In <i>Proceedings of the 2nd International Conference on Engineering Management, Information Technology and Intelligence - Volume 1: EMITI</i>, 517&ndash;521. SciTePress. https://doi.org/10.5220/0014362100004718.</div>
+            <!-- Resize Handle -->
+            <div class="panther-resize-handle">
+                <svg width="11" height="11" viewBox="0 0 11 11"><path d="M9.5 1.5L1.5 9.5M9.5 4.5L4.5 9.5M9.5 7.5L7.5 9.5" stroke="#999" stroke-width="1"/></svg>
+            </div>
+        </div>
+    </section>
+
     <!-- Gallery Fan Section -->
     <section class="gallery-fan" id="gallery">
         <div class="gallery-fan-header">
@@ -441,9 +491,14 @@
         <p>&copy; 2026 Yunbing Han. Made with creativity.</p>
     </footer>
 
+    <!-- Three.js + addons -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
     <!-- GSAP + ScrollTrigger -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-    <script src="script.js"></script>
+    <script src="hero3d.js?v=312"></script>
+    <script src="script.js?v=314"></script>
+    <script src="dotgrid.js?v=1"></script>
 </body>
 </html>
