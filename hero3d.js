@@ -20,10 +20,10 @@
         return document.documentElement.getAttribute('data-theme') === 'dark';
     }
 
-    // ── Renderer (alpha enabled so we can copy transparent model renders) ──
+    // ── Renderer ──
     let renderer;
     try {
-        renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true, preserveDrawingBuffer: true });
+        renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
     } catch(e) {
         console.error('[hero3d] renderer failed:', e);
         return;
@@ -69,14 +69,8 @@
         });
     }, false);
 
-    // ── Overlay canvas (2D) for compositing the 3D model above text ──
-    const modelCtx = modelCanvas.getContext('2d');
-    function sizeOverlayCanvas() {
-        const dpr = Math.min(window.devicePixelRatio, 2);
-        modelCanvas.width = window.innerWidth * dpr;
-        modelCanvas.height = window.innerHeight * dpr;
-    }
-    sizeOverlayCanvas();
+    // Hide the overlay canvas — we now render everything to the main canvas
+    modelCanvas.style.display = 'none';
 
     // ── 3D Scene (letters) ──
     const scene = new THREE.Scene();
@@ -826,7 +820,6 @@
         camera.updateProjectionMatrix();
         renderer.setSize(window.innerWidth, window.innerHeight);
         responsiveScale = getResponsiveScale();
-        sizeOverlayCanvas();
         const dpr = renderer.getPixelRatio();
         bgUniforms.uResolution.value.set(window.innerWidth, window.innerHeight);
         letterUniforms.uResolution.value.set(window.innerWidth * dpr, window.innerHeight * dpr);
@@ -974,18 +967,11 @@
         camera.position.z = 20 + scrollProgress * 3;
         camera.lookAt(0, 0, 0);
 
-        // 6. Render: model to canvas (transparent), copy to overlay, then background
+        // 6. Render: background first, then model on top (single canvas, no drawImage)
         renderer.setClearColor(0x000000, 0);
         renderer.clear();
-        renderer.render(scene, camera);
-
-        // Copy model render (with transparency) to overlay canvas
-        modelCtx.clearRect(0, 0, modelCanvas.width, modelCanvas.height);
-        modelCtx.drawImage(canvas, 0, 0, modelCanvas.width, modelCanvas.height);
-
-        // Render background to main canvas
-        renderer.clear();
         renderer.render(bgScene, bgCamera);
+        renderer.render(scene, camera);
     }
 
     animate();
