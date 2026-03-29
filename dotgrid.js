@@ -113,7 +113,7 @@
     if (lastRowCard) {
       var rect = lastRowCard.getBoundingClientRect();
       var arcY = rect.bottom + 30;
-      if (arcY < canvas.height + 200) {
+      if (arcY > 0 && arcY < canvas.height + 200) {
         var w = canvas.width;
         var h = canvas.height;
         ctx.beginPath();
