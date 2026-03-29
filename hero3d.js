@@ -23,7 +23,7 @@
     // ── Renderer ──
     let renderer;
     try {
-        renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+        renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
     } catch(e) {
         console.error('[hero3d] renderer failed:', e);
         return;
@@ -968,7 +968,7 @@
         camera.lookAt(0, 0, 0);
 
         // 6. Render: background first, then model on top (single canvas, no drawImage)
-        renderer.setClearColor(0x000000, 0);
+        renderer.setClearColor(0x000000, 1);
         renderer.clear();
         renderer.render(bgScene, bgCamera);
         renderer.render(scene, camera);
