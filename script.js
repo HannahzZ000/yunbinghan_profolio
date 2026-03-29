@@ -716,12 +716,6 @@ updateShapes();
         if (stylesBtn && label) stylesBtn.querySelector('span').textContent = label.textContent;
     });
 
-    // --- Spacing dropdown: change line-height ---
-    setupDropdown('pantherSpacingBtn', 'pantherSpacingMenu', 'pantherSpacingWrap', (item) => {
-        const spacing = item.dataset.spacing;
-        if (spacing) content.style.lineHeight = spacing;
-    });
-
     // --- Citation Format dropdown: switch citation style ---
     const citations = {
         chicago: 'Han, Yunbing. 2025. \u201CEEG-Driven Dynamic Immersion Design for XR Gaming Experiences.\u201D In <i>Proceedings of the 2nd International Conference on Engineering Management, Information Technology and Intelligence - Volume 1: EMITI</i>, 517\u2013521. SciTePress. https://doi.org/10.5220/0014362100004718.',
