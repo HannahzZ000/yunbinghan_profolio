@@ -116,17 +116,19 @@ button {
     align-items: center;
     justify-content: center;
     pointer-events: auto;
-    /* Circular shape that covers the entire viewport.
-       We use a pseudo-element so we can animate only transform + opacity (GPU-only). */
+    overflow: visible;
+    background: var(--primary);
+    /* Solid bg guarantees full coverage on mobile Safari (no gaps behind browser chrome).
+       The ::before circle handles the shrink animation. */
 }
 
 .page-transition::before {
     content: '';
     position: absolute;
-    /* Make a circle big enough to cover all viewport corners:
-       radius = sqrt(50^2 + 50^2) ≈ 70.7vh, diameter ≈ 142vmax */
-    width: 150vmax;
-    height: 150vmax;
+    /* Circle must cover all viewport corners including mobile browser chrome.
+       200vmax guarantees full coverage on any aspect ratio + safe area. */
+    width: 200vmax;
+    height: 200vmax;
     border-radius: 50%;
     background: var(--primary);
     top: 50%;
@@ -137,6 +139,7 @@ button {
 
 .page-transition.done {
     pointer-events: none;
+    background: transparent;
 }
 
 .page-transition.done::before {
