@@ -6,20 +6,9 @@
 gsap.registerPlugin(ScrollTrigger);
 
 // --- Prevent overscroll above hero (blocks Safari rubber-band bounce) ---
+// Use passive listeners to avoid blocking scroll on mobile
 window.addEventListener('scroll', function() {
     if (window.scrollY < 0) window.scrollTo(0, 0);
-}, { passive: false });
-document.addEventListener('touchmove', function(e) {
-    if (window.scrollY <= 0) {
-        var touch = e.touches[0];
-        if (touch && touch.clientY > (window._lastTouchY || 0)) {
-            e.preventDefault();
-        }
-    }
-    window._lastTouchY = e.touches[0] ? e.touches[0].clientY : 0;
-}, { passive: false });
-document.addEventListener('touchstart', function(e) {
-    window._lastTouchY = e.touches[0] ? e.touches[0].clientY : 0;
 }, { passive: true });
 
 // --- Footer Titles: auto-size so the longest line fills container width ---

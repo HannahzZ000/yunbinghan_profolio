@@ -23,7 +23,7 @@
     // ── Renderer (alpha enabled so we can copy transparent model renders) ──
     let renderer;
     try {
-        renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+        renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true, preserveDrawingBuffer: true });
     } catch(e) {
         console.error('[hero3d] renderer failed:', e);
         return;
