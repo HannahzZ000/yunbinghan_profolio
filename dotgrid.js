@@ -118,7 +118,7 @@
         var h = canvas.height;
         ctx.beginPath();
         ctx.moveTo(0, arcY);
-        ctx.quadraticCurveTo(w / 2, arcY + 120, w, arcY);
+        ctx.quadraticCurveTo(w / 2, arcY + 60, w, arcY);
         ctx.lineTo(w, h);
         ctx.lineTo(0, h);
         ctx.closePath();
