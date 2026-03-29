@@ -814,18 +814,26 @@
     }
     let responsiveScale = getResponsiveScale();
 
-    // ── Resize ──
+    // ── Resize — only on significant height changes (rotation, not mobile browser bar) ──
+    let lastResizeH = window.innerHeight;
     window.addEventListener('resize', () => {
-        camera.aspect = window.innerWidth / window.innerHeight;
+        var newH = window.innerHeight;
+        // Width always matters; height only if change > 100px (skip browser bar toggling)
+        var widthChanged = window.innerWidth !== renderer.domElement.width / renderer.getPixelRatio();
+        var bigHeightChange = Math.abs(newH - lastResizeH) > 100;
+        if (!widthChanged && !bigHeightChange) return;
+        lastResizeH = newH;
+
+        camera.aspect = window.innerWidth / newH;
         camera.updateProjectionMatrix();
-        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setSize(window.innerWidth, newH);
         responsiveScale = getResponsiveScale();
         const dpr = renderer.getPixelRatio();
-        bgUniforms.uResolution.value.set(window.innerWidth, window.innerHeight);
-        letterUniforms.uResolution.value.set(window.innerWidth * dpr, window.innerHeight * dpr);
+        bgUniforms.uResolution.value.set(window.innerWidth, newH);
+        letterUniforms.uResolution.value.set(window.innerWidth * dpr, newH * dpr);
         // Resize fluid simulation
         fluidW = Math.round(FLUID.resolution * window.innerWidth);
-        fluidH = Math.round(FLUID.resolution * window.innerHeight);
+        fluidH = Math.round(FLUID.resolution * newH);
         calcCellScale();
         advectionMat.uniforms.fboSize.value.set(fluidW, fluidH);
         vel0.setSize(fluidW, fluidH);

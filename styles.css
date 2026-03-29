@@ -356,6 +356,7 @@ button {
 /* --- Hero Section --- */
 .hero {
     height: 100vh;
+    height: 100svh;
     display: flex;
     align-items: flex-start;
     justify-content: center;

@@ -59,9 +59,15 @@
     }
   }
 
+  var lastDotH = window.innerHeight;
   function resize() {
+    var newH = window.innerHeight;
+    var widthChanged = window.innerWidth !== canvas.width;
+    var bigHeightChange = Math.abs(newH - lastDotH) > 100;
+    if (canvas.width && !widthChanged && !bigHeightChange) return;
+    lastDotH = newH;
     canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    canvas.height = newH;
     cols = Math.ceil(canvas.width / SPACING) + 1;
     rows = Math.ceil(canvas.height / SPACING) + 1;
   }

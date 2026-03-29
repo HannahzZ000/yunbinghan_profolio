@@ -40,9 +40,15 @@ window.addEventListener('scroll', function() {
     }
 
     sizeFooterTitles();
+    // Only refresh ScrollTrigger on significant height changes (rotation, not browser bar)
+    var lastH = window.innerHeight;
     window.addEventListener('resize', function() {
         sizeFooterTitles();
-        ScrollTrigger.refresh();
+        var newH = window.innerHeight;
+        if (Math.abs(newH - lastH) > 100) {
+            lastH = newH;
+            ScrollTrigger.refresh();
+        }
     });
     document.fonts.ready.then(function() {
         sizeFooterTitles();
