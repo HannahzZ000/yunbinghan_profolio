@@ -40,11 +40,18 @@ window.addEventListener('scroll', function() {
     }
 
     sizeFooterTitles();
-    // Only refresh ScrollTrigger on significant height changes (rotation, not browser bar)
+    // Only resize/refresh on meaningful changes — skip mobile browser bar toggling
+    var lastW = window.innerWidth;
     var lastH = window.innerHeight;
     window.addEventListener('resize', function() {
-        sizeFooterTitles();
+        var newW = window.innerWidth;
         var newH = window.innerHeight;
+        // Width change = real resize or rotation → recalculate text sizes
+        if (newW !== lastW) {
+            lastW = newW;
+            sizeFooterTitles();
+        }
+        // Significant height change = rotation, not browser bar → refresh triggers
         if (Math.abs(newH - lastH) > 100) {
             lastH = newH;
             ScrollTrigger.refresh();
